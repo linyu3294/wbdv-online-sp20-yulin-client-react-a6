@@ -1,15 +1,47 @@
-export const findModuleForCourse = (courseId) =>
-    fetch(`https://wbdv-generic-server.herokuapp.com/api/jannunzi/courses/${courseId}/modules`)
-        .then(response => response.json())
+import {COURSES_MODULES_API_URL, LESSONS_API_URL, MODULES_API_URL} from "../common/constants";
 
+export const findModuleForCourseCall = async (courseId) =>{
+    const response = await fetch(COURSES_MODULES_API_URL(courseId)
+    )
+    return await response.json()
+}
 
-export const deleteModule = (moduleId) =>
-    fetch(`https://wbdv-generic-server.herokuapp.com/api/jannunzi/modules/${moduleId}`, {
-        method: "DELETE"
+export const createModuleCall = async (courseId, module) => {
+    const response = await fetch(COURSES_MODULES_API_URL(courseId), {
+        method: "POST",
+        body: JSON.stringify(module),
+        headers: {
+            'content-type': 'application/json'
+        }
     })
-        .then(response => response.json())
+    return await response.json()
+}
+
+export const deleteModuleCall = async (module) => {
+    const response = await fetch(`${MODULES_API_URL}/${module._id}`, {
+        method: 'DELETE'
+    })
+    return await response.json()
+}
+
+export const updateModuleCall = async (module) =>
+{
+    const response = await fetch(`${MODULES_API_URL}/${module._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(module),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    return await response.json()
+}
 
 export default {
-    deleteModule,
-    findModuleForCourse
+    findModuleForCourseCall,
+    createModuleCall,
+    deleteModuleCall,
+    updateModuleCall
 }
+
+
+
