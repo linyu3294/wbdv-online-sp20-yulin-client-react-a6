@@ -72,7 +72,7 @@ class CourseEditorComponent extends React.Component {
                                 topics = {this.props.topics}
                                 widgets={this.props.widgets}
                                 lessonId={this.props.lessonId}
-                                topId = {this.props.topicId}
+                                topicId = {this.props.topicId}
                                 widgetId={this.props.widgetId}
                             />
 

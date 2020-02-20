@@ -20,7 +20,7 @@ export const deleteWidget = (widgetId) =>
         method: "DELETE"
     }).then(response => response.json())
 
-export const createWidget = (widget) =>
+export const createWidget = (topicId, widget) =>
     fetch("http://localhost:8080/widgets", {
         method: "POST",
         body: JSON.stringify(widget),

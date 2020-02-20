@@ -48,6 +48,9 @@ class WidgetListComponent extends React.Component {
                         <div key={widget.id}>
                             {widget.type === "HEADING"   && <HeadingWidget   saveWidget={this.saveWidget} editing={this.state.widget.id === widget.id} {...this.props} widget={widget}/>}
                             {widget.type === "PARAGRAPH" && <ParagraphWidget updateWidget={this.updateWidget} editing={this.state.widget.id === widget.id} widget={widget}/>}
+                            {
+                            this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topicId}/widget/${widget._id}`)
+                            }
                             <span>
                                 {   this.state.editingWidgetId !== widget.id &&
                                     <button onClick={
@@ -127,7 +130,7 @@ const dispatchToPropertyMapper = (dispatcher) => ({
                 widgetId: widgetId
             })),
     createWidget: (topicId) =>
-        createWidget({
+        createWidget(topicId, {
             title: "New Widget",
             type: "HEADING",
             topicId: topicId,
