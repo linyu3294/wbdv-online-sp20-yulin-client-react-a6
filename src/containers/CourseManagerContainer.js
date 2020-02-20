@@ -112,10 +112,10 @@ class CourseManagerContainer extends React.Component {
                         <CourseEditorComponent
                             {...props}
                             courseId={props.match.params.courseId}
-                            moduleId={props.match.params.moduleId}
-                            lessonId={props.match.params.lessonId}
-                            modules= {props.match.params.modules}
-                            lessons ={props.match.params.lessons}
+                            // moduleId={props.match.params.moduleId}
+                            // lessonId={props.match.params.lessonId}
+                            // modules= {props.match.params.modules}
+                            // lessons ={props.match.params.lessons}
                             hideEditor={this.hideEditor}/>
                         }/>
 
@@ -127,9 +127,9 @@ class CourseManagerContainer extends React.Component {
                                 {...props}
                                 courseId={props.match.params.courseId}
                                 moduleId={props.match.params.moduleId}
-                                lessonId={props.match.params.lessonId}
-                                modules= {props.match.params.modules}
-                                lessons ={this.props.lessons}
+                                // lessonId={props.match.params.lessonId}
+                                // modules= {props.match.params.modules}
+                                // lessons ={this.props.lessons}
                                 hideEditor={this.hideEditor}/>
                         }/>
                     <Route
@@ -141,8 +141,8 @@ class CourseManagerContainer extends React.Component {
                                 courseId={props.match.params.courseId}
                                 moduleId={props.match.params.moduleId}
                                 lessonId={props.match.params.lessonId}
-                                modules= {props.match.params.modules}
-                                lessons ={props.match.params.lessons}
+                                // modules= {props.match.params.modules}
+                                // lessons ={props.match.params.lessons}
                                 hideEditor={this.hideEditor}/>
                         }/>
 
@@ -156,7 +156,7 @@ class CourseManagerContainer extends React.Component {
                                 lessonId={props.match.params.lessonId}
                                 moduleId={props.match.params.moduleId}
                                 topicId={props.match.params.topicId}
-                                lessons ={props.match.params.lessons}
+                                // lessons ={props.match.params.lessons}
                                 hideEditor={this.hideEditor}/>
                         }/>
 
@@ -171,9 +171,9 @@ class CourseManagerContainer extends React.Component {
                                 moduleId={props.match.params.moduleId}
                                 topicId={props.match.params.topicId}
                                 widgetId={props.match.params.widgetId}
-                                widgets = {props.match.params.widgets}
-                                lessons ={props.match.params.lessons}
-                                topics  ={props.match.params.topics}
+                                // widgets = {props.match.params.widgets}
+                                // lessons ={props.match.params.lessons}
+                                // topics  ={props.match.params.topics}
                                 hideEditor={this.hideEditor}/>
                         }/>
 

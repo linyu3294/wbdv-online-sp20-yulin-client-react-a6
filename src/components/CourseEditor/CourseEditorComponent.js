@@ -59,21 +59,21 @@ class CourseEditorComponent extends React.Component {
                                 history ={this.props.history}
                                 courseId={this.props.courseId}
                                 moduleId={this.props.moduleId}
-                                lessons ={this.props.lessons}
-                                topics = {this.props.topics}
+                                // lessons ={this.props.lessons}
                                 lessonId={this.props.lessonId}
+                                topics = {this.props.topics}
                             />
 
                             <WidgetListComponent
                                 history ={this.props.history}
                                 courseId={this.props.courseId}
                                 moduleId={this.props.moduleId}
-                                lessons ={this.props.lessons}
-                                topics = {this.props.topics}
-                                widgets={this.props.widgets}
+                                // lessons ={this.props.lessons}
+                                // topics = {this.props.topics}
                                 lessonId={this.props.lessonId}
                                 topicId = {this.props.topicId}
                                 widgetId={this.props.widgetId}
+                                widgets={this.props.widgets}
                             />
 
                         </div>

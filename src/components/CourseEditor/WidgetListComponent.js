@@ -21,13 +21,13 @@ class WidgetListComponent extends React.Component {
     }
 
     componentDidMount() {
-    //   this.props.findWidgetsForTopic(this.props.topicId);
-       this.props.findAllWidgets();
+      this.props.findWidgetsForTopic(this.props.topicId);
+       // this.props.findAllWidgets();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.topicId !== this.props.topicId) {
-            // this.props.findWidgetsForTopic(this.props.topicId);
+            this.props.findWidgetsForTopic(this.props.topicId);
         }
     }
 
