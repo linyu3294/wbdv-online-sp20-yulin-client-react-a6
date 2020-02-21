@@ -6,6 +6,8 @@ class HeadingWidget extends React.Component {
         widget: this.props.widget
     }
 
+
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.editing !== this.props.editing) {
             this.setState({
@@ -18,7 +20,7 @@ class HeadingWidget extends React.Component {
         return(
             <div>
                 {
-                    !this.state.editing &&
+                    this.state.editing !== this.props.widgetId &&
                     <div>
                         {this.props.widget.size === 1 && <h1>{this.props.widget.text}</h1>}
                         {this.props.widget.size === 2 && <h2>{this.props.widget.text}</h2>}
@@ -40,7 +42,7 @@ class HeadingWidget extends React.Component {
                                     })
                                 }}
                                 value={this.state.widget.text}/>
-                                <span className="float-right">
+                                <span className="float-middle">
                                 <select
                                     onChange={(e) => {
                                         const newSize = parseInt(e.target.value);
@@ -58,6 +60,7 @@ class HeadingWidget extends React.Component {
                                     <button onClick={
                                         () =>
                                         {
+                                            this.setState(prevState => {this.state.editing = ! prevState.editing})
                                             this.props.saveWidget(this.state.widget)
                                         }}>
                                         Save

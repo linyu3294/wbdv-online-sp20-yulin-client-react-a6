@@ -63,7 +63,8 @@ class CourseEditorComponent extends React.Component {
                                 lessonId={this.props.lessonId}
                                 topics = {this.props.topics}
                             />
-
+                        <br/>
+                        <br/>
                             <WidgetListComponent
                                 history ={this.props.history}
                                 courseId={this.props.courseId}

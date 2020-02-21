@@ -10,7 +10,7 @@ export default class ModuleListComponent extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.courseId !== prevProps.courseId) {
-            this.props.findModulesForCourse (this.props.courseId)
+            // this.props.findModulesForCourse (this.props.courseId)
         }
     }
 
