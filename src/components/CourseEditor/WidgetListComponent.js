@@ -22,7 +22,7 @@ class WidgetListComponent extends React.Component {
 
     componentDidMount() {
       this.props.findWidgetsForTopic(this.props.topicId);
-       // this.props.findAllWidgets();
+      //  this.props.findAllWidgets();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -49,7 +49,7 @@ class WidgetListComponent extends React.Component {
                             {widget.type === "HEADING"   && <HeadingWidget   saveWidget={this.saveWidget} editing={this.state.widget.id === widget.id} {...this.props} widget={widget}/>}
                             {widget.type === "PARAGRAPH" && <ParagraphWidget updateWidget={this.updateWidget} editing={this.state.widget.id === widget.id} widget={widget}/>}
                             {
-                            this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topicId}/widget/${widget._id}`)
+                            this.props.history.push(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topicId}`)
                             }
                             <span>
                                 {   this.state.editingWidgetId !== widget.id &&

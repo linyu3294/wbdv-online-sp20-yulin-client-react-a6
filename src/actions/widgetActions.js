@@ -1,4 +1,4 @@
-export const WIDGET_FOR_TOPIC= "WIDGET_FOR_TOPIC"
+export const WIDGET_FOR_TOPIC= "FIND_WIDGETS_FOR_TOPIC"
 export const findWidgetsForTopicAction = (widgets) => ({
     type: WIDGET_FOR_TOPIC,
     widgets: widgets
