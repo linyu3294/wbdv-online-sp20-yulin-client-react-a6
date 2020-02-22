@@ -58,16 +58,15 @@ class ParagraphWidget extends React.Component {
                                     <option value={3}>Heading 3</option>
                                     <option value={4}>Heading 4</option>
                                 </select>
-                                    <button onClick={
-                                        () =>
-                                        {
-                                            this.setState(prevState => {this.state.editing = ! prevState.editing})
-                                            this.props.saveWidget(this.state.widget)
-                                        }}>
-                                        Save
-                                    </button>
-
-                                </span>
+                                <button onClick={
+                                    () =>
+                                    {
+                                        this.setState(prevState => {this.state.editing = ! prevState.editing})
+                                        this.props.saveWidget(this.state.widget)
+                                    }}>
+                                    Save
+                                </button>
+                        </span>
                     </div>
                 }
             </div>
