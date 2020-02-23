@@ -1,42 +1,43 @@
 import React from "react";
 import {connect} from 'react-redux'
 import {COURSES_MODULES_API_URL, MODULES_API_URL} from "../../common/constants";
+import {updateModule} from "../../actions/moduleActions";
 
-const ModuleListItemComponent = ({save, edit, editing, module, deleteModule, active, select}) =>
+class ModuleListItemComponent extends React.Component {
+
+render() {
+    return(
     <li
-        onClick={select}
-        className={`list-group-item ${active ? 'active':''}`}>
-        {module.title}
-        {editing &&
+        onClick={this.props.select}
+        className={`list-group-item ${this.props.active ? 'active' : ''}`}>
+        {!this.props.editing && this.props.module.title}
+        {this.props.editing &&
+        <input onChange={(e) => {
+            this.props.changeVal(e)
+        }}
+               value={this.props.editingInputTitle}
+        />
+
+        }
+        {this.props.editing &&
         <span>
             <button onClick={() =>
-                deleteModule(module._id)}
+                this.props.deleteModule(this.props.module._id)}
                     className="float-right">
                 Delete
             </button>
-            <button onClick={save}>
+            //TODO Fix Save so that it can be persistent.
+            <button onClick={
+                this.props.save
+            }>
                 Save
             </button>
         </span>}
-        {!editing && <button onClick={edit}>
+        {!this.props.editing && <button onClick={this.props.edit}>
             Edit
         </button>}
     </li>
-
-const stateToPropertyMapper = (state) => ({})
-const dispatchToPropertyMapper = (dispatch) => ({
-    deleteModule: (moduleId) => {
-        fetch(`${MODULES_API_URL}/${moduleId}`, {
-            method: 'DELETE'
-        }).then(response => response.json())
-            .then(status => dispatch({
-                type: 'DELETE_MODULE',
-                moduleId: moduleId
-            }))
+    )
     }
-})
-
-export default connect(
-    stateToPropertyMapper,
-    dispatchToPropertyMapper
-)(ModuleListItemComponent)
+}
+export default ModuleListItemComponent
