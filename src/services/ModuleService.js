@@ -17,8 +17,8 @@ export const createModuleCall = async (courseId, module) => {
     return await response.json()
 }
 
-export const deleteModuleCall = async (module) => {
-    const response = await fetch(`${MODULES_API_URL}/${module._id}`, {
+export const deleteModuleCall = async (moduleId) => {
+    const response = await fetch(`${MODULES_API_URL}/${moduleId}`, {
         method: 'DELETE'
     })
     return await response.json()

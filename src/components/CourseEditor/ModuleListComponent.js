@@ -3,7 +3,7 @@ import ModuleListItemComponent from "./ModuleListItemComponent";
 import {MODULES_API_URL} from "../../common/constants";
 import {connect} from "react-redux";
 import service from "../../services/ModuleService";
-import actions from "../../actions/moduleActions";
+import actions, {findModulesForCourse} from "../../actions/moduleActions";
 
 class ModuleListComponent extends React.Component {
     componentDidMount() {
@@ -12,7 +12,7 @@ class ModuleListComponent extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.courseId !== prevProps.courseId) {
-            // this.props.findModulesForCourse (this.props.courseId)
+            this.props.findModulesForCourse (this.props.courseId)
         }
     }
 
@@ -77,14 +77,9 @@ class ModuleListComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => ( {modules: state.modules.modules})
 const dispatchToPropertyMapper = (dispatch) => ({
-    deleteModule: (moduleId) => {
-        fetch(`${MODULES_API_URL}/${moduleId}`, {
-            method: 'DELETE'
-        }).then(response => response.json())
-            .then(status => dispatch({
-                type: 'DELETE_MODULE',
-                moduleId: moduleId
-            }))
+    deleteModule: async  (moduleId) => {
+        await service.deleteModuleCall(moduleId)
+        await dispatch(actions.deleteModule(moduleId))
     },
     createModule: (courseId, module) =>
         service.createModuleCall(courseId, module)

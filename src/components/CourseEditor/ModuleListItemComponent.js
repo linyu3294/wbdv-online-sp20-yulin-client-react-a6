@@ -4,6 +4,10 @@ import {COURSES_MODULES_API_URL, MODULES_API_URL} from "../../common/constants";
 import {updateModule} from "../../actions/moduleActions";
 
 class ModuleListItemComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {refresh: true}
+    }
 
     render() {
         return(
@@ -22,8 +26,11 @@ class ModuleListItemComponent extends React.Component {
                 }
                 {this.props.editing &&
                 <span>
-            <button onClick={() =>
-                this.props.deleteModule(this.props.module._id)}
+            <button onClick={() => {
+                this.props.deleteModule(this.props.module._id);
+
+            }
+            }
                     className="float-right">
                 Delete
             </button>
