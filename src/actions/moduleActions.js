@@ -19,10 +19,10 @@ export const deleteModule = (moduleId) => ({
 })
 
 export const UPDATE_MODULE = "UPDATE_MODULE"
-export const updateModule = (module) => ({
+export const updateModule = (module, moduleId) => ({
     type: UPDATE_MODULE,
     module: module,
-    moduleId: module._id
+    moduleId: moduleId
 })
 
 export default {

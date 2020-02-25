@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import service from "../../services/lessonService";
-import action from "../../actions/lessonActions";
+import actions from "../../actions/lessonActions";
 import {LESSONS_API_URL, MODULES_LESSONS_API_URL} from "../../common/constants";
 
 
@@ -12,22 +12,19 @@ constructor(prop) {
     this.state = {
         selectedLessonId: this.props.lessonId,
         editingLessonId: '',
-        // lessons: {title: '', _id: ''}
     }
 }
-
 
     componentDidMount() {
         this.props.findLessonsForModule(this.props.moduleId)
     }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.moduleId !== prevProps.moduleId) {
             this.props.findLessonsForModule(this.props.moduleId)
         }
     }
-
-
 
     render() {
         return(
@@ -104,24 +101,18 @@ const stateToPropertyMapper = (state) => ({
 const dispatcherToPropertyMapper = (dispatch) => ({
     deleteLesson: async  (lessonId) => {
         await service.deleteLessonCall(lessonId)
-        await dispatch(action.deleteLesson(lessonId))
+        await dispatch(actions.deleteLesson(lessonId))
     },
     createLesson: (moduleId, lesson) =>
         service.createLessonCall(moduleId, lesson)
             .then(actualLesson =>
-                dispatch(action.createLesson(actualLesson))),
+                dispatch(actions.createLesson(actualLesson))),
 
     findLessonsForModule: (moduleId) =>
         service.findLessonsForModuleCall(moduleId)
             .then(lessons =>
-                dispatch(action.findLessonsForModule(lessons))),
+                dispatch(actions.findLessonsForModule(lessons))),
 
-
-
-    // findLessonsForModule: async (moduleId) =>
-    //     fetch(MODULES_LESSONS_API_URL(moduleId))
-    //         .then(response => response.json())
-    //         .then(lessons => dispatch(action.findLessonsForModule(lessons))),
 
     updateLesson: async (lesson) => {
         const actualLesson = await service.updateLessonCall(lesson)
@@ -131,38 +122,6 @@ const dispatcherToPropertyMapper = (dispatch) => ({
             lessonId: actualLesson._id
         })
     },
-    //
-    // addLesson: (moduleId) =>
-    //     fetch(MODULES_LESSONS_API_URL(moduleId), {
-    //         method: 'POST',
-    //         body: JSON.stringify({title: 'New Lesson'}),
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         }
-    //     }).then(response => response.json())
-    //         .then(actualLesson =>
-    //             dispatch(action.createLesson(actualLesson)))
-    // ,
-    //
-    // deleteLesson: (lessonId) =>
-    //     fetch(`${LESSONS_API_URL}/${lessonId}`, {
-    //         method: 'DELETE'
-    //     }).then(response => response.json())
-    //         .then(status =>
-    //             dispatch({
-    //                 type: 'DELETE_LESSON',
-    //                 lessonId: lessonId
-    //             })),
-    //
-    // findAllLessons: () =>
-    //     fetch(LESSONS_API_URL)
-    //         .then(response => response.json())
-    //         .then(lessons =>
-    //             dispatcher({
-    //                 type: 'FIND_ALL_LESSONS',
-    //                 lessons: lessons
-    //             })
-    //         )
 })
 
 export default connect(

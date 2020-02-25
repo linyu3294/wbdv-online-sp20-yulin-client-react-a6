@@ -11,22 +11,17 @@ class ModuleListComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.courseId !== prevProps.courseId) {
+        if(this.props.courseId !== prevProps.courseId ) {
             this.props.findModulesForCourse (this.props.courseId)
         }
     }
 
     state = {
-        activeModuleId: this.props.moduleId,
+        activeModuleId: '',
         editingModuleId: '',
-        editingInputTitle: "New Module"
     }
 
-    changeVal = (e) =>{
-        this.setState(
-            {editingInputTitle : e.target.value}
-        )
-    }
+
 
     render() {
         return (
@@ -37,7 +32,9 @@ class ModuleListComponent extends React.Component {
                             {...this.props}
                             key={module._id}
                             changeVal = {this.changeVal}
-                            editingInputTitle = {this.editingInputTitle}
+                            fixChange = {
+                                ()=>{this.setState({activeModule: '', editingModuleId: ''})}}
+                            // editingInputTitle = {this.editingInputTitle}
                             editing={module._id === this.state.editingModuleId}
                             active={module._id === this.state.activeModuleId}
                             module={module}
@@ -56,9 +53,7 @@ class ModuleListComponent extends React.Component {
                                     activeModuleId: module._id
                                 })
                             }}
-                            save={() => this.setState({
-                                editingModuleId: ''
-                            })}
+
                         />)
                 }
                 <li className="list-group-item">
@@ -93,7 +88,13 @@ const dispatchToPropertyMapper = (dispatch) => ({
     findModulesForCourse: (courseId) =>
         service.findModuleForCourseCall(courseId)
             .then(modules =>
-                dispatch(actions.findModulesForCourse(modules)))
+                dispatch(actions.findModulesForCourse(modules))),
+
+    updateModule: async (module, moduleId) => {
+        const updatedModule = await service.updateModuleCall(module, moduleId)
+        await dispatch(actions.updateModule(updatedModule, updatedModule._id))
+    }
+
 
 })
 

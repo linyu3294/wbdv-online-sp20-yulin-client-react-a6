@@ -24,9 +24,9 @@ export const deleteModuleCall = async (moduleId) => {
     return await response.json()
 }
 
-export const updateModuleCall = async (module) =>
+export const updateModuleCall = async (module, moduleId) =>
 {
-    const response = await fetch(`${MODULES_API_URL}/${module._id}`, {
+    const response = await fetch(`${MODULES_API_URL}/${moduleId}`, {
         method: 'PUT',
         body: JSON.stringify(module),
         headers: {
