@@ -9,7 +9,7 @@ import {
     updateWidget,
     findWidgetsForTopic
 
-} from "../../services/WidgetService";
+} from "../../services/widgetService";
 import {findWidgetsForTopicAction} from "../../actions/widgetActions";
 
 class WidgetListComponent extends React.Component {

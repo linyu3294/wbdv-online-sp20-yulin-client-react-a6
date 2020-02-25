@@ -1,15 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
+import service from "../../services/lessonService";
+import action from "../../actions/lessonActions";
 import {LESSONS_API_URL, MODULES_LESSONS_API_URL} from "../../common/constants";
-import {createLessonCall, updateLessonCall, findLessonsForModuleCall} from "../../services/LessonService";
-import {createLessonAction, findLessonsForModuleAction, updateLessonAction} from "../../actions/lessonActions";
 
 
 
 class LessonTabsComponent extends React.Component {
-    constructor(props) {
-        super(props);
+constructor(prop) {
+    super(prop);
+    this.state = {
+        selectedLessonId: this.props.lessonId,
+        editingLessonId: '',
+        // lessons: {title: '', _id: ''}
     }
+}
+
 
     componentDidMount() {
         this.props.findLessonsForModule(this.props.moduleId)
@@ -21,11 +27,6 @@ class LessonTabsComponent extends React.Component {
         }
     }
 
-    state = {
-        selectedLessonId: '',
-        editingLessonId: '',
-        lessons: {title: '', _id: ''}
-    }
 
 
     render() {
@@ -87,7 +88,8 @@ class LessonTabsComponent extends React.Component {
                     </li>)
                 }
                 <li className="nav-item">
-                    <button onClick={() => this.props.addLesson(this.props.moduleId)}>+</button>
+                    <button onClick={() =>
+                        this.props.createLesson(this.props.moduleId, {title: "New Lesson"})}>+</button>
                 </li>
             </ul>
         )
@@ -99,52 +101,68 @@ const stateToPropertyMapper = (state) => ({
     lessons: state.lessons.lessons
 })
 
-const dispatcherToPropertyMapper = (dispatcher) => ({
-    findLessonsForModule: async (moduleId) =>
-        fetch(MODULES_LESSONS_API_URL(moduleId))
-            .then(response => response.json())
-            .then(lessons => dispatcher(findLessonsForModuleAction(lessons))),
+const dispatcherToPropertyMapper = (dispatch) => ({
+    deleteLesson: async  (lessonId) => {
+        await service.deleteLessonCall(lessonId)
+        await dispatch(action.deleteLesson(lessonId))
+    },
+    createLesson: (moduleId, lesson) =>
+        service.createLessonCall(moduleId, lesson)
+            .then(actualLesson =>
+                dispatch(action.createLesson(actualLesson))),
+
+    findLessonsForModule: (moduleId) =>
+        service.findLessonsForModuleCall(moduleId)
+            .then(lessons =>
+                dispatch(action.findLessonsForModule(lessons))),
+
+
+
+    // findLessonsForModule: async (moduleId) =>
+    //     fetch(MODULES_LESSONS_API_URL(moduleId))
+    //         .then(response => response.json())
+    //         .then(lessons => dispatch(action.findLessonsForModule(lessons))),
 
     updateLesson: async (lesson) => {
-        const actualLesson = await updateLessonCall(lesson)
-        await dispatcher({
+        const actualLesson = await service.updateLessonCall(lesson)
+        await dispatch({
             type: 'UPDATE_LESSON',
             lesson: actualLesson,
             lessonId: actualLesson._id
         })
     },
-
-    addLesson: (moduleId) =>
-        fetch(MODULES_LESSONS_API_URL(moduleId), {
-            method: 'POST',
-            body: JSON.stringify({title: 'New Lesson'}),
-            headers: {
-                'content-type': 'application/json'
-            }
-        }).then(response => response.json())
-            .then(actualLesson =>
-                dispatcher(createLessonAction(actualLesson)))
-    ,
-
-    deleteLesson: (lessonId) =>
-        fetch(`${LESSONS_API_URL}/${lessonId}`, {
-            method: 'DELETE'
-        }).then(response => response.json())
-            .then(status =>
-                dispatcher({
-                    type: 'DELETE_LESSON',
-                    lessonId: lessonId
-                })),
-
-    findAllLessons: () =>
-        fetch(LESSONS_API_URL)
-            .then(response => response.json())
-            .then(lessons =>
-                dispatcher({
-                    type: 'FIND_ALL_LESSONS',
-                    lessons: lessons
-                })
-            )
+    //
+    // addLesson: (moduleId) =>
+    //     fetch(MODULES_LESSONS_API_URL(moduleId), {
+    //         method: 'POST',
+    //         body: JSON.stringify({title: 'New Lesson'}),
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         }
+    //     }).then(response => response.json())
+    //         .then(actualLesson =>
+    //             dispatch(action.createLesson(actualLesson)))
+    // ,
+    //
+    // deleteLesson: (lessonId) =>
+    //     fetch(`${LESSONS_API_URL}/${lessonId}`, {
+    //         method: 'DELETE'
+    //     }).then(response => response.json())
+    //         .then(status =>
+    //             dispatch({
+    //                 type: 'DELETE_LESSON',
+    //                 lessonId: lessonId
+    //             })),
+    //
+    // findAllLessons: () =>
+    //     fetch(LESSONS_API_URL)
+    //         .then(response => response.json())
+    //         .then(lessons =>
+    //             dispatcher({
+    //                 type: 'FIND_ALL_LESSONS',
+    //                 lessons: lessons
+    //             })
+    //         )
 })
 
 export default connect(

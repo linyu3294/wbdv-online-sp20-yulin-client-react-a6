@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {LESSONS_API_URL, LESSONS_TOPICS_API_URL, MODULES_LESSONS_API_URL, TOPICS_API_URL} from "../../common/constants";
-import {updateLesson} from "../../services/LessonService";
-import {updateTopic} from "../../services/TopicService";
+import {updateLesson} from "../../services/lessonService";
+import {updateTopic} from "../../services/topicService";
 
 class TopicPillsComponent extends React.Component {
     constructor(props) {

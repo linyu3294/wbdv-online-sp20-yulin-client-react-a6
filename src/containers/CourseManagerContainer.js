@@ -1,6 +1,6 @@
 import React from 'react'
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
-import {createCourse, findAllCourses, deleteCourse} from '../services/CourseService'
+import {createCourse, findAllCourses, deleteCourse} from '../services/courseService'
 import CourseListComponent from "../components/CourseList/CourseListComponent";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 

@@ -2,8 +2,8 @@ import React from "react";
 import ModuleListItemComponent from "./ModuleListItemComponent";
 import {MODULES_API_URL} from "../../common/constants";
 import {connect} from "react-redux";
-import service from "../../services/ModuleService";
-import actions, {findModulesForCourse} from "../../actions/moduleActions";
+import service from "../../services/moduleService";
+import actions from "../../actions/moduleActions";
 
 class ModuleListComponent extends React.Component {
     componentDidMount() {
@@ -75,8 +75,12 @@ class ModuleListComponent extends React.Component {
 
 }
 
-const stateToPropertyMapper = (state) => ( {modules: state.modules.modules})
+const stateToPropertyMapper = (state) => ( {
+    modules: state.modules.modules
+})
+
 const dispatchToPropertyMapper = (dispatch) => ({
+
     deleteModule: async  (moduleId) => {
         await service.deleteModuleCall(moduleId)
         await dispatch(actions.deleteModule(moduleId))
@@ -85,6 +89,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
         service.createModuleCall(courseId, module)
             .then(actualModule =>
                 dispatch(actions.createModule(actualModule))),
+
     findModulesForCourse: (courseId) =>
         service.findModuleForCourseCall(courseId)
             .then(modules =>

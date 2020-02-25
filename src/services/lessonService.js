@@ -1,14 +1,14 @@
 import {LESSONS_API_URL, MODULES_LESSONS_API_URL} from "../common/constants";
 
 export const findLessonsForModuleCall = async (moduleId) =>{
-     await fetch(MODULES_LESSONS_API_URL(moduleId)
-    ).then(response => response.json());
+    const response = await fetch(MODULES_LESSONS_API_URL(moduleId))
+    return await response.json()
 }
 
-export const createLessonCall = async (moduleId) => {
+export const createLessonCall = async (moduleId, lesson) => {
     const response = await fetch(MODULES_LESSONS_API_URL(moduleId), {
         method: "POST",
-        body: JSON.stringify({title: 'New Lesson'}),
+        body: JSON.stringify(lesson),
         headers: {
             'content-type': 'application/json'
         }
@@ -16,8 +16,8 @@ export const createLessonCall = async (moduleId) => {
     return await response.json()
 }
 
-export const deleteLessonCall = async (lesson) => {
-    const response = await fetch(`${LESSONS_API_URL}/${lesson._id}`, {
+export const deleteLessonCall = async (lessonId) => {
+    const response = await fetch(`${LESSONS_API_URL}/${lessonId}`, {
         method: 'DELETE'
     })
     return await response.json()
