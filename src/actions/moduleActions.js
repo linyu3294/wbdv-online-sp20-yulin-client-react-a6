@@ -1,4 +1,5 @@
 
+
 export const FIND_MODULES_FOR_COURSE = "FIND_MODULES_FOR_COURSE"
 export const findModulesForCourse = (modules) => ({
     modules: modules,
@@ -23,3 +24,11 @@ export const updateModule = (module) => ({
     module: module,
     moduleId: module._id
 })
+
+export default {
+    findModulesForCourse,
+    updateModule,
+    createModule,
+    deleteModule,
+
+}

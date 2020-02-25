@@ -2,8 +2,10 @@ import React from "react";
 import ModuleListItemComponent from "./ModuleListItemComponent";
 import {MODULES_API_URL} from "../../common/constants";
 import {connect} from "react-redux";
+import service from "../../services/ModuleService";
+import actions from "../../actions/moduleActions";
 
-export default class ModuleListComponent extends React.Component {
+class ModuleListComponent extends React.Component {
     componentDidMount() {
         this.props.findModulesForCourse(this.props.courseId)
     }
@@ -22,7 +24,7 @@ export default class ModuleListComponent extends React.Component {
 
     changeVal = (e) =>{
         this.setState(
-        {editingInputTitle : e.target.value}
+            {editingInputTitle : e.target.value}
         )
     }
 
@@ -32,9 +34,14 @@ export default class ModuleListComponent extends React.Component {
                 {
                     this.props.modules && this.props.modules.map(module =>
                         <ModuleListItemComponent
+                            {...this.props}
                             key={module._id}
                             changeVal = {this.changeVal}
                             editingInputTitle = {this.editingInputTitle}
+                            editing={module._id === this.state.editingModuleId}
+                            active={module._id === this.state.activeModuleId}
+                            module={module}
+
                             edit={() => {
                                 const moduleId = module._id
                                 this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}`)
@@ -52,11 +59,6 @@ export default class ModuleListComponent extends React.Component {
                             save={() => this.setState({
                                 editingModuleId: ''
                             })}
-
-                            editing={module._id === this.state.editingModuleId}
-                            active={module._id === this.state.activeModuleId}
-
-                            module={module}
                         />)
                 }
                 <li className="list-group-item">
@@ -84,12 +86,18 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 moduleId: moduleId
             }))
     },
-
+    createModule: (courseId, module) =>
+        service.createModuleCall(courseId, module)
+            .then(actualModule =>
+                dispatch(actions.createModule(actualModule))),
+    findModulesForCourse: (courseId) =>
+        service.findModuleForCourseCall(courseId)
+            .then(modules =>
+                dispatch(actions.findModulesForCourse(modules)))
 
 })
 
-  connect(
+export default connect(
     stateToPropertyMapper,
     dispatchToPropertyMapper
 )(ModuleListComponent)
-

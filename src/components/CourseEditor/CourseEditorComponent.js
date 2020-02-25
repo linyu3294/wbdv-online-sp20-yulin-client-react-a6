@@ -10,6 +10,7 @@ import modules from '../../reducers/moduleReducer'
 import lessons from '../../reducers/lessonReducer'
 import topics from "../../reducers/topicReducer";
 import widgets from "../../reducers/widgetReducer";
+import ModuleListComponent from "./ModuleListComponent";
 
 const reducers = combineReducers({
     modules, lessons, topics, widgets
@@ -38,7 +39,7 @@ class CourseEditorComponent extends React.Component {
                     <h3>Course Editor {this.props.moduleId}</h3>
                     <div className="row">
                         <div className="col-3">
-                            <ModuleListContainer
+                            <ModuleListComponent
                                 history ={this.props.history}
                                 moduleId={this.props.moduleId}
                                 courseId={this.props.courseId}

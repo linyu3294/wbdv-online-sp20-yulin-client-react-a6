@@ -5,22 +5,23 @@ import {updateModule} from "../../actions/moduleActions";
 
 class ModuleListItemComponent extends React.Component {
 
-render() {
-    return(
-    <li
-        onClick={this.props.select}
-        className={`list-group-item ${this.props.active ? 'active' : ''}`}>
-        {!this.props.editing && this.props.module.title}
-        {this.props.editing &&
-        <input onChange={(e) => {
-            this.props.changeVal(e)
-        }}
-               value={this.props.editingInputTitle}
-        />
+    render() {
+        return(
+            <li
+                onClick={this.props.select}
+                className={`list-group-item ${this.props.active ? 'active' : ''}`}>
+                {!this.props.editing && this.props.module.title}
+                {this.props.editing &&
+                <input onChange={(e) => {
+                    this.props.changeVal(e)
+                }}
+                       value={this.props.editingInputTitle}
+                />
 
-        }
-        {this.props.editing &&
-        <span>
+
+                }
+                {this.props.editing &&
+                <span>
             <button onClick={() =>
                 this.props.deleteModule(this.props.module._id)}
                     className="float-right">
@@ -33,11 +34,11 @@ render() {
                 Save
             </button>
         </span>}
-        {!this.props.editing && <button onClick={this.props.edit}>
-            Edit
-        </button>}
-    </li>
-    )
+                {!this.props.editing && <button onClick={this.props.edit}>
+                    Edit
+                </button>}
+            </li>
+        )
     }
 }
 export default ModuleListItemComponent
