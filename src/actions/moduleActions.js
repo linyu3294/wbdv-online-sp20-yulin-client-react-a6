@@ -1,34 +1,28 @@
+import { FIND_ALL_MODULES, CREATE_MODULE, DELETE_MODULE, UPDATE_MODULE } from "../constants/ModuleConstants";
 
-
-export const FIND_MODULES_FOR_COURSE = "FIND_MODULES_FOR_COURSE"
-export const findModulesForCourse = (modules) => ({
-    modules: modules,
-    type: FIND_MODULES_FOR_COURSE
+export const findAllModules = (modules) => ({
+    type: FIND_ALL_MODULES,
+    modules: modules
 })
 
-export const CREATE_MODULE = "CREATE_MODULE"
-export const createModule = (module) => ({
+export const createModule = (newModule) => ({
     type: CREATE_MODULE,
-    module: module
+    module: newModule
 })
 
-export const DELETE_MODULE = "DELETE_MODULE"
 export const deleteModule = (moduleId) => ({
     type: DELETE_MODULE,
     moduleId: moduleId
 })
 
-export const UPDATE_MODULE = "UPDATE_MODULE"
-export const updateModule = (module, moduleId) => ({
+export const updateModule = (module) => ({
     type: UPDATE_MODULE,
-    module: module,
-    moduleId: moduleId
+    module: module
 })
 
 export default {
-    findModulesForCourse,
-    updateModule,
     createModule,
+    findAllModules,
     deleteModule,
-
+    updateModule
 }

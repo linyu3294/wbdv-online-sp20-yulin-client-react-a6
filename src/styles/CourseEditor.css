@@ -1,0 +1,13 @@
+.module-list {
+    min-height: calc(100vh - 60px);
+}
+
+.no-selection-img {
+    width: 80%;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+}
+
+.navbar {
+    justify-content: start !important;
+}

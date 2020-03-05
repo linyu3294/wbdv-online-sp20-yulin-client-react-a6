@@ -1,43 +1,64 @@
-import {TOPICS_API_URL, LESSONS_TOPICS_API_URL, MODULES_API_URL} from "../common/constants";
+import { API_URL } from "../constants/app-constants";
 
-export const findTopicsForLesson = async (lessonId) =>{
-    const response = await fetch(LESSONS_TOPICS_API_URL(lessonId)
-    )
-    return await response.json()
-}
-
-export const createTopic = async (lessonId, topic) => {
-    const response = await fetch(LESSONS_TOPICS_API_URL(lessonId), {
+export const createTopic = async (topicId, topic) => {
+    const response = await fetch(`${API_URL}/topics/${topicId}/topics`, {
         method: "POST",
         body: JSON.stringify(topic),
         headers: {
             'content-type': 'application/json'
         }
     })
+
     return await response.json()
 }
 
-export const deleteTopic = async (topic) => {
-    const response = await fetch(`${TOPICS_API_URL}/${topic._id}`, {
-        method: 'DELETE'
+export const findTopicsForLesson = async (topicId) => {
+    const response = await fetch(`${API_URL}/topics/${topicId}/topics`, {
+        headers: {
+            'content-type': 'application/json'
+        }
     })
+
     return await response.json()
 }
 
-export const updateTopic = async (topic) =>
-{
-    const response = await fetch(`${TOPICS_API_URL}/${topic._id}`, {
+export const findTopicById = async (topicId) => {
+    const response = await fetch(`${API_URL}/topics/${topicId}`, {
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
+    return await response.json();
+}
+
+export const updateTopic = async (topicId, topic) => {
+    const response = await fetch(`${API_URL}/topics/${topicId}`, {
         method: 'PUT',
         body: JSON.stringify(topic),
         headers: {
             'content-type': 'application/json'
         }
     })
-    return await response.json()
+
+    return await response.json();
+}
+
+export const deleteTopic = async (topicId) => {
+    const response = await fetch(`${API_URL}/topics/${topicId}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
+    return await response.json();
 }
 
 export default {
-    findTopicsForLesson,
     createTopic,
-    updateTopic
+    findTopicsForLesson,
+    findTopicById,
+    updateTopic,
+    deleteTopic
 }

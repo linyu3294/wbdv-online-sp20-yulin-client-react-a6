@@ -1,25 +1,49 @@
-export const WIDGET_FOR_TOPIC= "FIND_WIDGETS_FOR_TOPIC"
-export const findWidgetsForTopicAction = (widgets) => ({
-    type: WIDGET_FOR_TOPIC,
+import { FIND_ALL_WIDGETS, CREATE_WIDGET, DELETE_WIDGET, UPDATE_WIDGET, UPDATE_TEXT, UPDATE_SIZE, UPDATE_NAME } from "../constants/WidgetConstants";
+
+export const findAllWidgets = (widgets) => ({
+    type: FIND_ALL_WIDGETS,
     widgets: widgets
 })
 
-export const CREATE_WIDGET = "CREATE_WIDGET"
-export const createWidget = (widget) => ({
+export const createWidget = (newWidget) => ({
     type: CREATE_WIDGET,
-    widget: widget
+    newWidget: newWidget
 })
 
-export const DELETE_WIDGET = "DELETE_WIDGET"
 export const deleteWidget = (widgetId) => ({
     type: DELETE_WIDGET,
     widgetId: widgetId
 })
 
-export const UPDATE_WIDGET = "UPDATE_WIDGET"
 export const updateWidget = (widget) => ({
-    type: 'UPDATE_WIDGET',
-    widget: widget,
-    widgetId: widget._id
+    type: UPDATE_WIDGET,
+    widget: widget
 })
 
+export const updateText = (widgetId, text) => ({
+    type: UPDATE_TEXT,
+    widgetId: widgetId,
+    text: text
+})
+
+export const updateSize = (widgetId, size) => ({
+    type: UPDATE_SIZE,
+    widgetId: widgetId,
+    size: size
+})
+
+export const updateName = (widgetId, name) => ({
+    type: UPDATE_NAME,
+    widgetId: widgetId,
+    name: name
+})
+
+export default {
+    createWidget,
+    findAllWidgets,
+    deleteWidget,
+    updateWidget,
+    updateText,
+    updateSize,
+    updateName
+}

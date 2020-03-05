@@ -1,26 +1,28 @@
+import { FIND_ALL_TOPICS, CREATE_TOPIC, DELETE_TOPIC, UPDATE_TOPIC } from "../constants/TopicConstants";
 
-export const FIND_TOPICS_FOR_LESSON= "FIND_TOPICS_FOR_LESSON"
-export const findTopicsForLesson = (topics) => ({
-    type: FIND_TOPICS_FOR_LESSON,
+export const findAllTopics = (topics) => ({
+    type: FIND_ALL_TOPICS,
     topics: topics
 })
 
-export const CREATE_TOPIC = "CREATE_TOPIC"
-export const createTopic = (topic) => ({
+export const createTopic = (newTopic) => ({
     type: CREATE_TOPIC,
-    topic: topic
+    newTopic: newTopic
 })
 
-export const DELETE_TOPIC = "DELETE_TOPIC"
 export const deleteTopic = (topicId) => ({
     type: DELETE_TOPIC,
     topicId: topicId
 })
 
-export const UPDATE_TOPIC = "UPDATE_TOPIC"
 export const updateTopic = (topic) => ({
-    type: 'UPDATE_TOPIC',
-    topic: topic,
-    topicId: topic._id
+    type: UPDATE_TOPIC,
+    topic: topic
 })
 
+export default {
+    createTopic,
+    findAllTopics,
+    deleteTopic,
+    updateTopic
+}

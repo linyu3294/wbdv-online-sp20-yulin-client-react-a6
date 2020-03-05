@@ -1,32 +1,28 @@
+import { FIND_ALL_LESSONS, CREATE_LESSON, DELETE_LESSON, UPDATE_LESSON } from "../constants/LessonConstants";
 
-export const FIND_LESSONS_FOR_MODULE = "FIND_LESSONS_FOR_MODULE"
-export const findLessonsForModule = (lessons) => ({
-    type: FIND_LESSONS_FOR_MODULE,
+export const findAllLessons = (lessons) => ({
+    type: FIND_ALL_LESSONS,
     lessons: lessons
 })
 
-export const CREATE_LESSON = "CREATE_LESSON"
-export const createLesson = (lesson) => ({
+export const createLesson = (newLesson) => ({
     type: CREATE_LESSON,
-    lesson: lesson
+    newLesson: newLesson
 })
 
-export const DELETE_LESSON = "DELETE_LESSON"
 export const deleteLesson = (lessonId) => ({
     type: DELETE_LESSON,
     lessonId: lessonId
 })
 
-export const UPDATE_LESSON = "UPDATE_LESSON"
 export const updateLesson = (lesson) => ({
-    type: 'UPDATE_LESSON',
-    lesson: lesson,
-    lessonId: lesson._id
+    type: UPDATE_LESSON,
+    lesson: lesson
 })
 
 export default {
-    findLessonsForModule,
     createLesson,
+    findAllLessons,
     deleteLesson,
     updateLesson
 }
