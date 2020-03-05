@@ -74,11 +74,11 @@ class CourseCard extends Component {
           onMouseLeave={() => this.setState({ isHovered: false })}
         >
           <div className="card-title" align="center">
-            <img
-              src={process.env.PUBLIC_URL + "/course.svg"}
-              width="200"
-              alt="course-img"
-            />
+            {/*<img*/}
+            {/*  src={process.env.PUBLIC_URL + "/course.svg"}*/}
+            {/*  width="200"*/}
+            {/*  alt="course-img"*/}
+            {/*/>*/}
           </div>
           <div className="card-body pointer">
             <h5

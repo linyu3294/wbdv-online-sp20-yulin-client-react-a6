@@ -1,1 +1,1 @@
-export const API_URL = "https://wbdv-generic-server.herokuapp.com/api/j4inam"
+export const API_URL = "https://wbdv-generic-server.herokuapp.com/api/03291990"

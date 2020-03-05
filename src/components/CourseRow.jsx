@@ -69,11 +69,11 @@ class CourseRow extends Component {
         >
           {!this.state.isEditable && (
             <td>
-              <img
-                src={process.env.PUBLIC_URL + "/course.svg"}
-                width="50"
-                alt="Course Icon"
-              />
+              {/*<img*/}
+              {/*  src={process.env.PUBLIC_URL + "/course.svg"}*/}
+              {/*  width="50"*/}
+              {/*  alt="Course Icon"*/}
+              {/*/>*/}
                 <span onClick={this.openEditor}
                   className={`ml-3 pointer ${
                     this.state.isSelected ? "text-white" : ""

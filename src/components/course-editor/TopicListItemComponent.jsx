@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import topicsService from "../../services/TopicService";
-import topicActions from "../../actions/TopicActions";
+import topicsService from "../../services/topicService";
+import topicActions from "../../actions/topicActions";
 import { connect } from "react-redux";
 
 class TopicListItemComponent extends Component {

@@ -6,7 +6,7 @@ import {
   createCourse,
   deleteCourse,
   updateCourse
-} from "../services/CourseService";
+} from "../services/courseService";
 import moment from "moment";
 import _ from "lodash";
 import CourseGrid from "../components/CourseGrid";
@@ -191,12 +191,12 @@ class CourseManager extends Component {
                   className="offset-2 col-8 offset-lg-4 col-lg-4"
                   align="center"
                 >
-                  <img
-                    src={process.env.PUBLIC_URL + "no_data.svg"}
-                    alt="no_data"
-                    className="mt-5"
-                    width="100%"
-                  />
+                  {/*<img*/}
+                  {/*  src={process.env.PUBLIC_URL + "no_data.svg"}*/}
+                  {/*  alt="no_data"*/}
+                  {/*  className="mt-5"*/}
+                  {/*  width="100%"*/}
+                  {/*/>*/}
                   <h5 className="mt-5">
                     Umm, We couldn't find anything! Start out by adding new
                     courses from the top.

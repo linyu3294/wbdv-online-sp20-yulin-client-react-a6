@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import lessonsService from "../../services/LessonService";
-import lessonActions from "../../actions/LessonActions";
+import lessonsService from "../../services/lessonService";
+import lessonActions from "../../actions/lessonActions";
 import { connect } from "react-redux";
 
 class LessonListItemComponent extends Component {
@@ -9,7 +9,7 @@ class LessonListItemComponent extends Component {
     isSelected: false,
     isEditEnabled: false,
     newLessonTitle: ""
-  };
+  };F
 
   componentDidMount() {
     this.setState({

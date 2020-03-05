@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { findCourseById } from "../services/CourseService";
+import { findCourseById } from "../services/courseService";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import ModuleListComponent from "../components/course-editor/ModuleListComponent";
@@ -89,11 +89,11 @@ class CourseEditor extends Component {
                 <>
                   <div className="row">
                     <div className="offset-2 col-8" align="center">
-                      <img
-                        src={`${process.env.PUBLIC_URL}/no_selection.svg`}
-                        alt="no_selection"
-                        className="no-selection-img"
-                      />
+                      {/*<img*/}
+                      {/*  src={`${process.env.PUBLIC_URL}/no_selection.svg`}*/}
+                      {/*  alt="no_selection"*/}
+                      {/*  className="no-selection-img"*/}
+                      {/*/>*/}
                       <h4 className="text-center">
                         Add / Select a module, lesson and topic to get started!
                       </h4>
