@@ -1,7 +1,7 @@
-import { API_URL } from "../constants/app-constants";
+import { JANNUNZI_API_URL } from "../constants/app-constants";
 
 export const createModule = async (courseId, module) => {
-    const response = await fetch(`${API_URL}/courses/${courseId}/modules`, {
+    const response = await fetch(`${JANNUNZI_API_URL}/courses/${courseId}/modules`, {
         method: "POST",
         body: JSON.stringify(module),
         headers: {
@@ -13,7 +13,7 @@ export const createModule = async (courseId, module) => {
 }
 
 export const findModulesForCourse = async (courseId) => {
-    const response = await fetch(`${API_URL}/courses/${courseId}/modules`, {
+    const response = await fetch(`${JANNUNZI_API_URL}/courses/${courseId}/modules`, {
         headers: {
             'content-type': 'application/json'
         }
@@ -23,7 +23,7 @@ export const findModulesForCourse = async (courseId) => {
 }
 
 export const findModuleById = async (moduleId) => {
-    const response = await fetch(`${API_URL}/modules/${moduleId}`, {
+    const response = await fetch(`${JANNUNZI_API_URL}/modules/${moduleId}`, {
         headers: {
             'content-type': 'application/json'
         }
@@ -33,7 +33,7 @@ export const findModuleById = async (moduleId) => {
 }
 
 export const updateModule = async (moduleId, module) => {
-    const response = await fetch(`${API_URL}/modules/${moduleId}`, {
+    const response = await fetch(`${JANNUNZI_API_URL}/modules/${moduleId}`, {
         method: 'PUT',
         body: JSON.stringify(module),
         headers: {
@@ -45,7 +45,7 @@ export const updateModule = async (moduleId, module) => {
 }
 
 export const deleteModule = async (moduleId) => {
-    const response = await fetch(`${API_URL}/modules/${moduleId}`, {
+    const response = await fetch(`${JANNUNZI_API_URL}/modules/${moduleId}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
