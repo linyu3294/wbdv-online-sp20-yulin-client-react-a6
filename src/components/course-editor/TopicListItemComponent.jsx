@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import topicsService from "../../services/topicService";
+import topicService from "../../services/topicService";
 import topicActions from "../../actions/topicActions";
 import { connect } from "react-redux";
 
@@ -126,13 +126,13 @@ const stateToPropertyMapper = state => {
 const dispatchToPropertyMapper = dispatch => {
   return {
     deleteTopic: topicID => {
-      topicsService.deleteTopic(topicID).then(() => {
+      topicService.deleteTopic(topicID).then(() => {
         dispatch(topicActions.deleteTopic(topicID));
       });
     },
 
     updateTopic: topic => {
-      topicsService.updateTopic(topic._id, topic).then(() => {
+      topicService.updateTopic(topic._id, topic).then(() => {
         dispatch(topicActions.updateTopic(topic));
       });
     }

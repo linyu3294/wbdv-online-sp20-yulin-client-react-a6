@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TopicListItemComponent from "./TopicListItemComponent";
-import topicsService from "../../services/topicService";
+import topicService from "../../services/topicService";
 import topicActions from "../../actions/topicActions";
 import { connect } from "react-redux";
 
@@ -93,13 +93,13 @@ const stateToPropertyMapper = state => {
 const dispatchToPropertyMapper = dispatch => {
   return {
     findTopicsForLesson: lessonId => {
-      topicsService.findTopicsForLesson(lessonId).then(topics => {
+      topicService.findTopicsForLesson(lessonId).then(topics => {
         dispatch(topicActions.findAllTopics(topics));
       });
     },
 
     createTopic: (lessonId, topic) => {
-      topicsService.createTopic(lessonId, topic).then(newTopic => {
+      topicService.createTopic(lessonId, topic).then(newTopic => {
         dispatch(topicActions.createTopic(newTopic));
       });
     }

@@ -1,13 +1,27 @@
 import React, { Component } from "react";
 import '../../../styles/Widgets.css';
 import HeadingPreview from "./HeadingPreview";
+import {connect} from "react-redux";
+import widgetService from "../../../services/widgetService";
 
 class HeadingWidgetComponent extends Component {
+ state = {
+     editingWidgetId: '',
+     widget: {id: ''}
+ }
+
+
   handleTextChange = e => {};
 
   handleNameChange = e => {};
 
-  handleSizeChange = e => {};
+  handleSizeChange = e => {
+    const newSize = parseInt(e.target.value);
+    this.setState(prevState => {
+      prevState.widget.size = newSize;
+      return prevState
+    })
+  };
 
   render() {
     return (
@@ -73,4 +87,30 @@ class HeadingWidgetComponent extends Component {
   }
 }
 
-export default HeadingWidgetComponent;
+const stateToPropertyMapper = state => {
+  return {
+    widgets: state.widgets.widgets
+  }
+}
+
+const dispatchToPropertyMapper = (dispatcher) => ({
+deleteWidget: (widgetId) =>
+    widgetService.deleteWidget(widgetId)
+        .then(status => dispatcher({
+          type: 'DELETE_WIDGET',
+          widgetId: widgetId
+        })),
+updateWidget: (widgetId, newWidget) =>
+    widgetService.updateWidget(widgetId, newWidget)
+        .then(status => dispatcher({
+          type: "UPDATE",
+          widget: newWidget
+        })),
+})
+
+
+
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper
+)(HeadingWidgetComponent);
