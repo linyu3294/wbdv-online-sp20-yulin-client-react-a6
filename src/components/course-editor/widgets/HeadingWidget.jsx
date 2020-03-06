@@ -6,8 +6,8 @@ import widgetService from "../../../services/widgetService";
 
 class HeadingWidgetComponent extends Component {
  state = {
-     editingWidgetId: '',
-     widget: {id: ''}
+     widget: {id: '',
+              text: 'Text'}
  }
 
 

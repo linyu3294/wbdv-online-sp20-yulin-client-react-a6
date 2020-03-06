@@ -82,6 +82,7 @@ class CourseEditor extends Component {
                     selectedModuleID={this.props.selectedModuleID}
                     selectedLessonID={this.props.selectedLessonID}
                     selectedTopicID={this.props.selectedTopicID}
+                    topic={this.props.topic}
                   />
                   <hr />
                 </>
@@ -114,6 +115,7 @@ class CourseEditor extends Component {
                         selectedModuleID={this.props.selectedModuleID}
                         selectedLessonID={this.props.selectedLessonID}
                         selectedTopicID={this.props.selectedTopicID}
+                        widget ={this.props.widget}
                       // widget={{
                       //   text: "Heading 1",
                       //   size: 1,
@@ -125,9 +127,7 @@ class CourseEditor extends Component {
             </div>
           </div>
         </div>
-        <button className="btn-danger btn-lg fab">
-          <i className="fa fa-plus"></i>
-        </button>
+
       </Provider>
     );
   }

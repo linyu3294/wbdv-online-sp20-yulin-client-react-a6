@@ -1,14 +1,20 @@
 import React from "react";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import HeadingWidget from "./widgets/HeadingWidget";
 import widgetService from "../../services/widgetService";
 import widgetActions from "../../actions/widgetActions";
+import topicActions from "../../actions/topicActions";
 
 
 class WidgetListComponent extends React.Component {
     state = {
-        editingWidgetId: '',
-        widget: {id: ''}
+        widget: {id: '',
+                type: '',
+                title: '',
+                name: '',
+                size: 3},
+        editingWidgetId: ''
+
     }
 
     componentDidMount() {
@@ -39,15 +45,27 @@ class WidgetListComponent extends React.Component {
                             {widget.type === "HEADING"   &&
                                     <HeadingWidget   saveWidget={this.saveWidget}
                                                      editing={this.state.editingWidgetId=== widget.id}
-                                                     widget={widget}/>}
+                                                     widget={this.state.widget}/>}
                             {/*{widget.type === "PARAGRAPH" && */}
                             {/*        <ParagraphWidget saveWidget={this.saveWidget} */}
                             {/*                         editing={this.state.editingWidgetId === widget.id} */}
                             {/*                         widget={widget}/>}*/}
 
                         </div>
+
                     )
                 }
+                <div>
+                <button
+                        className="btn-danger btn-lg fab"
+                            onClick={
+                                () =>
+                            this.props.createWidget(this.props.topicId)}
+                        >
+                        <i className="fa fa-plus"></i>
+
+                    </button>
+                </div>
             </div>
         )
     }
@@ -57,10 +75,10 @@ const stateToPropertyMapper = (state) => ({
     widgets: state.widgets.widgets
 })
 
-const dispatchToPropertyMapper = (dispatcher) => ({
+const dispatchToPropertyMapper = (dispatch) => ({
     findWidgetsForTopic:  (topicId) =>
         widgetService.findWidgetsForTopic(topicId)
-            .then(widgets => dispatcher(
+            .then(widgets => dispatch(
                 widgetActions.findWidgetsForTopic(widgets)
             )),
     createWidget: (topicId) =>
@@ -68,15 +86,13 @@ const dispatchToPropertyMapper = (dispatcher) => ({
             title: "New Widget",
             type: "HEADING",
             topicId: topicId,
-            id: (new Date()).getTime() + ""
-        })
-            .then(actualWidget => dispatcher({
-                type: "ADD_WIDGET",
-                widget: actualWidget
-            })),
+            id: 234})
+            .then(newWidget => {
+                dispatch(widgetActions.createWidget(newWidget));
+            }),
     findAllWidgets: () =>
         widgetService.findAllWidgets()
-            .then(actualWidgets =>  dispatcher({
+            .then(actualWidgets =>  dispatch({
                 type: "FIND_ALL_WIDGETS",
                 widgets: actualWidgets
             }))

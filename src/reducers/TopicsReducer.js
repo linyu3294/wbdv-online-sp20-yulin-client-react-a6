@@ -24,7 +24,7 @@ const topicsReducer = (state = initialState, action) => {
 
         case DELETE_TOPIC:
             topics = [...state.topics];
-            _.remove(topics, {_id: action.topicId})
+            _.remove(topics, {id: action.topicId})
 
             return {
                 topics: topics

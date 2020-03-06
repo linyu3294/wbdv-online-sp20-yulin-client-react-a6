@@ -40,13 +40,13 @@ class TopicListComponent extends Component {
           {this.props.topics &&
             this.props.topics.map(topic => (
               <TopicListItemComponent
-                key={topic._id}
+                key={topic.id}
                 topic={topic}
                 history={this.props.history}
                 courseId={this.props.courseId}
                 selectedLessonID={this.props.selectedLessonID}
                 selectedModuleID={this.props.selectedModuleID}
-                selectedTopicID={this.props.selectedTopicID}
+                selectedTopicID={parseInt(this.props.selectedTopicID)}
               />
             ))}
           {!this.state.showAddTopicInput && (
@@ -93,7 +93,7 @@ const stateToPropertyMapper = state => {
 const dispatchToPropertyMapper = dispatch => {
   return {
     findTopicsForLesson: lessonId => {
-      topicService.findTopicsForLesson(lessonId).then(topics => {
+        topicService.findTopicsForLesson(lessonId).then(topics => {
         dispatch(topicActions.findAllTopics(topics));
       });
     },
