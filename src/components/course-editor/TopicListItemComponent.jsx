@@ -14,14 +14,12 @@ class TopicListItemComponent extends Component {
       this.setState({
         isSelected: this.props.selectedTopicID === this.props.topic.id
       });
-
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.isSelected !== this.state.isSelected) {
       this.setState({ isEditEnabled: false });
     }
-
     if (
         this.state.isSelected !==
         (this.props.topic.id === this.props.selectedTopicID)
