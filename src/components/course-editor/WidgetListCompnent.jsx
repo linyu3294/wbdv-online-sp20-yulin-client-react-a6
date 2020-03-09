@@ -137,7 +137,6 @@ const dispatchToPropertyMapper = (dispatch) => ({
         const response = await widgetService.findAllWidgets()
         const widgets = await dispatch(widgetActions.findAllWidgets(response))
         console.log("Widgets" , widgets)
-
     }
 })
 

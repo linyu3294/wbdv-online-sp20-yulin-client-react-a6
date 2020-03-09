@@ -6,9 +6,12 @@ import widgetService from "../../../services/widgetService";
 import widgetActions from "../../../actions/widgetActions";
 
 class HeadingWidgetComponent extends Component {
-    state = {
-        editing: this.props.editing,
-        widget: this.props.widget
+    constructor(props) {
+        super(props);
+        this.state = {
+            editing: this.props.editing,
+            widget: this.props.widget
+        }
     }
 
   handleTextChange = e => {};
@@ -16,16 +19,19 @@ class HeadingWidgetComponent extends Component {
   handleNameChange = e => {};
 
   handleSizeChange = e => {
-    const newSize = parseInt(e.target.value);
-        this.setState({
-            testSize: newSize
-        })
+      e.stopPropagation();
+      const newSize = parseInt(e.target.value);
+      this.setState(prevState => {
+          prevState.widget.textSize = newSize;
+          return prevState
+      })
   }
 
-    saveWidget = (widget) => {
+    saveWidget = ( widget) => {
         this.props.commitEdit()
-        this.props.updateWidget(this.props. widget.id, widget)
+        this.props.updateWidget(widget)
     }
+
   render() {
     return (
       <>
@@ -49,11 +55,16 @@ class HeadingWidgetComponent extends Component {
                       <option value="PARAGRAPH">Paragraph Widget</option>
                     </select>
                     <button className="btn btn-danger mx-1 float-left"
-                            onClick={()=>this.props.deleteWidget(this.props.widget.id)}>
+                            onClick={()=>this.props.deleteWidget(parseInt(this.state.widget.id))}>
                       <i className="fa fa-trash"></i>
                     </button>
                     <button className="btn btn-danger mx-1 float-left"
-                            onClick={()=>this.saveWidget(this.props.widget.id)}>
+                            onClick={
+                                (e) => {
+                                    console.log(this.state.widget);
+                                    this.saveWidget(this.state.widget)
+                                }
+                            }>
                       <i className="fa fa-check"></i>
                     </button>
                   </div>
@@ -65,13 +76,14 @@ class HeadingWidgetComponent extends Component {
                 </div>
                 <div className="row my-2">
                     <div className="col-12">
-                    <select className="form-control" onChange={this.handleSizeChange} value={this.props.widget.size}>
-                      <option value="1">Heading 1</option>
-                      <option value="2">Heading 2</option>
-                      <option value="3">Heading 3</option>
-                      <option value="4">Heading 4</option>
-                      <option value="5">Heading 5</option>
-                      <option value="6">Heading 6</option>
+                    <select className="form-control" onChange={(e) => this.handleSizeChange(e)} value={this.state.widget.textSize}>
+
+                      <option value="6">Heading 1</option>
+                      <option value="5">Heading 2</option>
+                      <option value="4">Heading 3</option>
+                      <option value="3">Heading 4</option>
+                      <option value="2">Heading 5</option>
+                      <option value="1">Heading 6</option>
                     </select>
                     </div>
                 </div>
@@ -83,7 +95,7 @@ class HeadingWidgetComponent extends Component {
                 <div className="row">
                   <div className="col-12 my-2">
                     <h4>Preview</h4>
-                    <HeadingPreview text={this.props.widget.text} size={this.props.widget.textSize}/>
+                    <HeadingPreview text={this.state.widget.text} size={this.state.widget.textSize}/>
                   </div>
                 </div>
               </div>

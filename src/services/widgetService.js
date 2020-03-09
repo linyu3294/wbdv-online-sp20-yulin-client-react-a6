@@ -16,14 +16,17 @@ export const deleteWidget = (widgetId) =>
         method: "DELETE"
     }).then(response => response.json())
 
-export const updateWidget = (wid, widget) =>
-    fetch(`${LOCAL_API_URL}/widgets/${wid}`, {
-        method: "PUT",
-        body: JSON.stringify(widget),
-        headers: {
-            'content-type': "application/json"
+export const updateWidget = async (wid, widget) =>{
+    const response = await fetch(`${LOCAL_API_URL}/widgets/${wid}`, {
+            method: "PUT",
+            body: JSON.stringify(widget),
+            headers: {
+                'content-type': "application/json"
+            }
         }
-    }).then(response => response.json())
+    )
+    return await response.json()
+}
 
 export const findWidgetsForTopic = async (topicId) =>
     await fetch(`${LOCAL_API_URL}/topics/${topicId}/widgets`)
