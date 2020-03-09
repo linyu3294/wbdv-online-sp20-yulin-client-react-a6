@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { FIND_ALL_WIDGETS, CREATE_WIDGET, DELETE_WIDGET, UPDATE_WIDGET, UPDATE_TEXT, UPDATE_SIZE, UPDATE_NAME } from "../constants/WidgetConstants";
+import { FIND_WIDGETS_FOR_TOPIC, FIND_ALL_WIDGETS, CREATE_WIDGET, DELETE_WIDGET, UPDATE_WIDGET, UPDATE_TEXT, UPDATE_SIZE, UPDATE_NAME } from "../constants/WidgetConstants";
+import React from "react";
 
 const initialState = {
     widgets: []
@@ -7,20 +8,29 @@ const initialState = {
 
 const widgetsReducer = (state = initialState, action) => {
     let widgets, indexToUpdate;
+
+
+
     switch (action.type) {
+        case FIND_WIDGETS_FOR_TOPIC:
+            return {
+                widgets: action.widgets
+            }
+
         case FIND_ALL_WIDGETS:
             widgets = _.sortBy(action.widgets, 'order')
             return {
                 widgets: widgets
             }
 
-        case CREATE_WIDGET:
+        case CREATE_WIDGET: {
             widgets = [...state.widgets];
             widgets.push(action.widget);
-
+            console.log("Adding widgets", widgets)
             return {
                 widgets: widgets
             }
+        }
 
         case DELETE_WIDGET:
             widgets = [...state.widgets];

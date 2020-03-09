@@ -4,11 +4,16 @@ import HeadingWidget from "./widgets/HeadingWidget";
 import widgetService from "../../services/widgetService";
 import widgetActions from "../../actions/widgetActions";
 import topicActions from "../../actions/topicActions";
+import TopicListItemComponent from "./TopicListItemComponent";
 
 
 class WidgetListComponent extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     state = {
-        widget: {id: '',
+        widget: {
+                id: '',
                 type: '',
                 title: '',
                 name: '',
@@ -18,13 +23,15 @@ class WidgetListComponent extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.findWidgetsForTopic(this.props.topicId)
-         this.props.findAllWidgets();
+        // this.props.findAllWidgets();
+        this.props.findWidgetsForTopic(this.props.selectedTopicID)
     }
 
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.topicId !== this.props.topicId) {
-            this.props.findWidgetsForTopic(this.props.topicId)
+        if(prevProps.selectedTopicID !== this.props.selectedTopicID) {
+            // this.props.findAllWidgets();
+            this.props.findWidgetsForTopic(this.props.selectedTopicID)
         }
     }
 
@@ -36,22 +43,27 @@ class WidgetListComponent extends React.Component {
     }
 
     render() {
-        console.log(this.props.widgets)
         return(
             <div>
-                {
-                    this.props.widgets && this.props.widgets.map(widget =>
-                        <div key={widget.id}>
-                            {widget.type === "HEADING"   &&
-                                    <HeadingWidget   saveWidget={this.saveWidget}
-                                                     editing={this.state.editingWidgetId=== widget.id}
-                                                     widget={this.state.widget}/>}
+                {this.props.widgets && this.props.widgets.map(widget =>
+                        <div>
+                        {widget.type === "HEADING" &&
+                            <HeadingWidget
+                                key={widget.id}
+                                widget={widget}
+                                editing={this.state.editingWidgetId === this.state.widget.id}
+                                saveWidget={this.saveWidget}
+                                courseId={this.props.courseId}
+                                selectedModuleID={this.props.selectedModuleID}
+                                selectedLessonID={this.props.selectedLessonID}
+                        />}
+
                             {/*{widget.type === "PARAGRAPH" && */}
                             {/*        <ParagraphWidget saveWidget={this.saveWidget} */}
                             {/*                         editing={this.state.editingWidgetId === widget.id} */}
                             {/*                         widget={widget}/>}*/}
-
                         </div>
+
 
                     )
                 }
@@ -59,11 +71,10 @@ class WidgetListComponent extends React.Component {
                 <button
                         className="btn-danger btn-lg fab"
                             onClick={
-                                () =>
-                            this.props.createWidget(this.props.topicId)}
+                                () => this.props.createWidget(this.props.selectedTopicID)
+                            }
                         >
                         <i className="fa fa-plus"></i>
-
                     </button>
                 </div>
             </div>
@@ -85,8 +96,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
         widgetService.createWidget(topicId, {
             title: "New Widget",
             type: "HEADING",
-            topicId: topicId,
-            id: 234})
+            })
             .then(newWidget => {
                 dispatch(widgetActions.createWidget(newWidget));
             }),

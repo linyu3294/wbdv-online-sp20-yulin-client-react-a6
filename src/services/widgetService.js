@@ -1,14 +1,23 @@
 import {JANNUNZI_API_URL, LOCAL_API_URL} from "../constants/app-constants";
 
-export const createWidget = (topicId, widget) =>
-    fetch(`${LOCAL_API_URL}/widgets`, {
+export const createWidget = async (topicId, widget) => {
+    {
+        console.log(widget)
+    }
+    const response = await fetch(`${LOCAL_API_URL}/topics/${topicId}/widgets`, {
         method: "POST",
         body: JSON.stringify(widget),
         headers: {
             'content-type': "application/json"
         }
     })
-        .then(response => response.json())
+    {
+        console.log("")
+        console.log("Response", response)
+        console.log("")
+    }
+    return await response.json()
+}
 
 export const deleteWidget = (widgetId) =>
     fetch(`${LOCAL_API_URL}/widgets/${widgetId}`, {
@@ -24,16 +33,14 @@ export const updateWidget = (wid, widget) =>
         }
     }).then(response => response.json())
 
-export const findWidgetsForTopic = async (topic) =>
-    await fetch(`${LOCAL_API_URL}/topics/${topic}/widgets/`)
+export const findWidgetsForTopic = async (topicId) =>
+    await fetch(`${LOCAL_API_URL}/topics/${topicId}/widgets`)
         .then(response => response.json())
 
 
 export const findAllWidgets = () =>
     fetch(`${LOCAL_API_URL}/widgets`)
         .then(response => response.json())
-
-
 
 
 

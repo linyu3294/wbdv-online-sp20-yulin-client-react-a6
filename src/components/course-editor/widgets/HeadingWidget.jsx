@@ -10,7 +10,6 @@ class HeadingWidgetComponent extends Component {
               text: 'Text'}
  }
 
-
   handleTextChange = e => {};
 
   handleNameChange = e => {};

@@ -44,8 +44,8 @@ class TopicListComponent extends Component {
                 topic={topic}
                 history={this.props.history}
                 courseId={this.props.courseId}
-                selectedLessonID={this.props.selectedLessonID}
                 selectedModuleID={this.props.selectedModuleID}
+                selectedLessonID={this.props.selectedLessonID}
                 selectedTopicID={parseInt(this.props.selectedTopicID)}
               />
             ))}

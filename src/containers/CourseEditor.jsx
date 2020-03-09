@@ -115,12 +115,13 @@ class CourseEditor extends Component {
                         selectedModuleID={this.props.selectedModuleID}
                         selectedLessonID={this.props.selectedLessonID}
                         selectedTopicID={this.props.selectedTopicID}
-                        widget ={this.props.widget}
-                      // widget={{
-                      //   text: "Heading 1",
-                      //   size: 1,
-                      //   name: "Heading Widget"
-                      // }}
+                        widgets ={this.props.widgets}
+                        widget = {this.props.widget}
+                        // widget={{
+                        //   text: "Heading 1",
+                        //   size: 1,
+                        //   name: "Heading Widget"
+                        // }}
                     />
                   </>
                 )}
