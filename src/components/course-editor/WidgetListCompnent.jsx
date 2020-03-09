@@ -16,6 +16,7 @@ class WidgetListComponent extends React.Component {
                 id: '',
                 type: '',
                 title: '',
+                text: '',
                 name: '',
                 textSize: ''},
     }
@@ -51,12 +52,12 @@ class WidgetListComponent extends React.Component {
                         <>
                             <div className="card-body">
                             <>
-                                {widget.textSize ===1 && <h6>{widget.title}</h6>}
-                                {widget.textSize ===2 && <h5>{widget.title}</h5>}
-                                {widget.textSize ===3 && <h4>{widget.title}</h4>}
-                                {widget.textSize ===4 && <h3>{widget.title}</h3>}
-                                {widget.textSize ===5 && <h2>{widget.title}</h2>}
-                                {widget.textSize ===6 && <h1>{widget.title}</h1>}
+                                {widget.textSize ===1 && <h6>{widget.text}</h6>}
+                                {widget.textSize ===2 && <h5>{widget.text}</h5>}
+                                {widget.textSize ===3 && <h4>{widget.text}</h4>}
+                                {widget.textSize ===4 && <h3>{widget.text}</h3>}
+                                {widget.textSize ===5 && <h2>{widget.text}</h2>}
+                                {widget.textSize ===6 && <h1>{widget.text}</h1>}
                                 <button className="btn btn-info mx-1 float-left"
                                         onClick={
                                             () => this.setState({

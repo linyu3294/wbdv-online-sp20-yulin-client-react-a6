@@ -14,9 +14,21 @@ class HeadingWidgetComponent extends Component {
         }
     }
 
-  handleTextChange = e => {};
+  handleTextChange = e => {
+      e.stopPropagation();
+      const newText = e.target.value;
+      this.setState(prevState => {
+          prevState.widget.text = newText;
+          return prevState
+      })};
 
-  handleNameChange = e => {};
+  handleNameChange = e => {
+      e.stopPropagation();
+      const newName = e.target.value;
+      this.setState(prevState => {
+          prevState.widget.name = newName;
+          return prevState
+      })};
 
   handleSizeChange = e => {
       e.stopPropagation();
@@ -71,7 +83,7 @@ class HeadingWidgetComponent extends Component {
                 </div>
                 <div className="row my-2">
                     <div className="col-12">
-                        <input type="text" className="form-control" placeholder="Widget Text" onChange={this.handleTextChange}/>
+                        <input type="text" className="form-control" placeholder={this.state.widget.text} onChange={(e) => this.handleTextChange(e)}/>
                     </div>
                 </div>
                 <div className="row my-2">
@@ -89,7 +101,7 @@ class HeadingWidgetComponent extends Component {
                 </div>
                 <div className="row my-2">
                     <div className="col-12">
-                        <input type="text" className="form-control" placeholder="Widget Name" onChange={this.handleNameChange}/>
+                        <input type="text" className="form-control" placeholder={this.state.widget.name} onChange={this.handleNameChange}/>
                     </div>
                 </div>
                 <div className="row">
