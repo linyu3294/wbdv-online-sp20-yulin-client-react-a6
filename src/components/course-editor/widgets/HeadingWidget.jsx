@@ -3,11 +3,13 @@ import '../../../styles/Widgets.css';
 import HeadingPreview from "./HeadingPreview";
 import {connect} from "react-redux";
 import widgetService from "../../../services/widgetService";
-import topicService from "../../../services/topicService";
-import topicActions from "../../../actions/topicActions";
 import widgetActions from "../../../actions/widgetActions";
 
 class HeadingWidgetComponent extends Component {
+    state = {
+        editing: this.props.editing,
+        widget: this.props.widget
+    }
 
   handleTextChange = e => {};
 
@@ -15,12 +17,15 @@ class HeadingWidgetComponent extends Component {
 
   handleSizeChange = e => {
     const newSize = parseInt(e.target.value);
-    this.setState(prevState => {
-      prevState.widget.size = newSize;
-      return prevState
-    })
-  };
+        this.setState({
+            testSize: newSize
+        })
+  }
 
+    saveWidget = (widget) => {
+        this.props.commitEdit()
+        this.props.updateWidget(this.props. widget.id, widget)
+    }
   render() {
     return (
       <>
@@ -46,6 +51,10 @@ class HeadingWidgetComponent extends Component {
                     <button className="btn btn-danger mx-1 float-left"
                             onClick={()=>this.props.deleteWidget(this.props.widget.id)}>
                       <i className="fa fa-trash"></i>
+                    </button>
+                    <button className="btn btn-danger mx-1 float-left"
+                            onClick={()=>this.saveWidget(this.props.widget.id)}>
+                      <i className="fa fa-check"></i>
                     </button>
                   </div>
                 </div>
@@ -74,7 +83,7 @@ class HeadingWidgetComponent extends Component {
                 <div className="row">
                   <div className="col-12 my-2">
                     <h4>Preview</h4>
-                    <HeadingPreview text={this.props.widget.text} size={this.props.widget.size}/>
+                    <HeadingPreview text={this.props.widget.text} size={this.props.widget.textSize}/>
                   </div>
                 </div>
               </div>
@@ -101,7 +110,7 @@ const dispatchToPropertyMapper = dispatch => {
         },
 
         updateWidget: widget => {
-            widgetService.updateWidgeth(widget.id, widget).then(() => {
+            widgetService.updateWidget(widget.id, widget).then(() => {
                 dispatch(widgetActions.updateWidget(widget));
             });
         }

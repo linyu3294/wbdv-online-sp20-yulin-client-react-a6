@@ -42,7 +42,7 @@ const widgetsReducer = (state = initialState, action) => {
 
         case UPDATE_WIDGET:
             widgets = [...state.widgets];
-            indexToUpdate = _.findIndex(widgets, { _id: action.widget._id });
+            indexToUpdate = _.findIndex(widgets, { id: action.widget._id });
             widgets.splice(indexToUpdate, 1, action.widget);
 
             return {
@@ -51,7 +51,7 @@ const widgetsReducer = (state = initialState, action) => {
 
         case UPDATE_TEXT:
             widgets = [...state.widgets];
-            indexToUpdate = _.findIndex(widgets, { _id: action.widgetId });
+            indexToUpdate = _.findIndex(widgets, { id: action.widgetId });
             widgets[indexToUpdate].text = action.text;
 
             return {
@@ -60,7 +60,7 @@ const widgetsReducer = (state = initialState, action) => {
 
         case UPDATE_SIZE:
             widgets = [...state.widgets];
-            indexToUpdate = _.findIndex(widgets, { _id: action.widgetId });
+            indexToUpdate = _.findIndex(widgets, { id: action.widgetId });
             widgets[indexToUpdate].size = action.size;
 
             return {
@@ -69,7 +69,7 @@ const widgetsReducer = (state = initialState, action) => {
 
         case UPDATE_NAME:
             widgets = [...state.widgets];
-            indexToUpdate = _.findIndex(widgets, { _id: action.widgetId });
+            indexToUpdate = _.findIndex(widgets, { id: action.widgetId });
             widgets[indexToUpdate].name = action.name;
 
             return {

@@ -1,11 +1,8 @@
 import React from "react";
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import HeadingWidget from "./widgets/HeadingWidget";
 import widgetService from "../../services/widgetService";
 import widgetActions from "../../actions/widgetActions";
-import topicService from "../../services/topicService";
-import topicActions from "../../actions/topicActions";
-
 
 
 
@@ -20,7 +17,7 @@ class WidgetListComponent extends React.Component {
                 type: '',
                 title: '',
                 name: '',
-                size: 3},
+                textSize: ''},
     }
 
     componentDidMount() {
@@ -36,51 +33,81 @@ class WidgetListComponent extends React.Component {
         }
     }
 
-    saveWidget = (widget) => {
-        this.setState({
-            editingWidgetId: ''
-        })
-        this.props.updateWidget(widget.id, widget)
+    commitEdit = (widget) => {
+       this.setState({editingWidgetId: '' })
     }
 
     render() {
-        console.log("rendered widgets", (this.props.widget))
         return(
-            <div>
-                {this.props.widgets && this.props.widgets.map(widget =>
-                        <div>
-                        {widget.type === "HEADING" &&
-                            <HeadingWidget
-                                key={widget.id}
-                                widget={widget}
-                                type = {widget.type}
-                                editing={this.state.editingWidgetId === this.state.widget.id}
-                                saveWidget={this.saveWidget}
-                                courseId={this.props.courseId}
-                                selectedModuleID={this.props.selectedModuleID}
-                                selectedLessonID={this.props.selectedLessonID}
-                            />}
-
-                            {/*{widget.type === "PARAGRAPH" && */}
-                            {/*        <ParagraphWidget saveWidget={this.saveWidget} */}
-                            {/*                         editing={this.state.editingWidgetId === widget.id} */}
-                            {/*                         widget={widget}/>}*/}
+        <div className= "container">
+         <>
+            {this.props.widgets && this.props.widgets.map(widget =>
+            <>
+                {this.state.editingWidgetId !== widget.id &&
+                    <div className="row">
+                    <>
+                        <div className="col-12">
+                        <div className="card">
+                        <>
+                            <div className="card-body">
+                            <>
+                                {widget.textSize ===1 && <h6>{widget.title}</h6>}
+                                {widget.textSize ===2 && <h5>{widget.title}</h5>}
+                                {widget.textSize ===3 && <h4>{widget.title}</h4>}
+                                {widget.textSize ===4 && <h3>{widget.title}</h3>}
+                                {widget.textSize ===5 && <h2>{widget.title}</h2>}
+                                {widget.textSize ===6 && <h1>{widget.title}</h1>}
+                                <button className="btn btn-info mx-1 float-left"
+                                        onClick={
+                                            () => this.setState({
+                                                editingWidgetId: widget.id,
+                                                widget: widget})}>
+                                    <i className="fa fa-pencil"></i>
+                                </button>
+                            </>
+                            </div>
+                        </>
                         </div>
-
-
-                    )
+                        </div>
+                    </>
+                    </div>
                 }
-                <div>
+
+                { this.state.editingWidgetId === widget.id  &&
+                    widget.type === "HEADING" &&
+                    <HeadingWidget
+                    key={widget.id}
+                    widget={widget}
+                    type = {widget.type}
+                    editing={this.state.editingWidgetId === widget.id}
+                    commitEdit={this.commitEdit}
+                    courseId={this.props.courseId}
+                    selectedModuleID={this.props.selectedModuleID}
+                    selectedLessonID={this.props.selectedLessonID}
+                />}
+
+                {/*{widget.type === "PARAGRAPH" && */}
+                {/*        <ParagraphWidget saveWidget={this.saveWidget} */}
+                {/*                         editing={this.state.editingWidgetId === widget.id} */}
+                {/*                         widget={widget}/>}*/}
+            </>
+            ) }
+
+
+            <div>
+            <>
                 <button
-                        className="btn-danger btn-lg fab"
-                            onClick={
-                                () => this.props.createWidget(this.props.selectedTopicID)
-                            }
-                        >
-                        <i className="fa fa-plus"></i>
-                    </button>
-                </div>
+                    className="btn-danger btn-lg fab"
+                        onClick={
+                            () =>
+                            this.props.createWidget(this.props.selectedTopicID)
+                        }
+                    ><i className="fa fa-plus"></i>
+                </button>
+            </>
             </div>
+        </>
+        </div>
         )
     }
 }
