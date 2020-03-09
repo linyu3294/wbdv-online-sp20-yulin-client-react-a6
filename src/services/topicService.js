@@ -19,7 +19,6 @@ export const findTopicsForLesson = async (lessonId) => {
             'content-type': 'application/json'
         }
     })
-
     return await response.json()
 }
 

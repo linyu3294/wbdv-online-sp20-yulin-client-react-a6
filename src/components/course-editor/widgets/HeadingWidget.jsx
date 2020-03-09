@@ -6,7 +6,6 @@ import widgetService from "../../../services/widgetService";
 
 class HeadingWidgetComponent extends Component {
 
-
   handleTextChange = e => {};
 
   handleNameChange = e => {};

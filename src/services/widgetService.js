@@ -30,9 +30,11 @@ export const findWidgetsForTopic = async (topicId) =>
         .then(response => response.json())
 
 
-export const findAllWidgets = () =>
-    fetch(`${LOCAL_API_URL}/widgets`)
-        .then(response => response.json())
+export const findAllWidgets = async () => {
+    const response = await fetch(`${LOCAL_API_URL}/widgets`)
+    const widgets  = response.json()
+    return widgets
+}
 
 
 

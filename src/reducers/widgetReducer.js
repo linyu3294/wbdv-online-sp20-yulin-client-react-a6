@@ -16,15 +16,16 @@ const widgetsReducer = (state = initialState, action) => {
             }
 
         case FIND_ALL_WIDGETS:
+            console.log("my widgets", action.widgets)
             widgets = _.sortBy(action.widgets, 'order')
             return {
                 widgets: widgets
             }
 
         case CREATE_WIDGET: {
-            console.log("Adding widgets", action.widget)
+            console.log("Adding widgets", action.widgets)
             widgets = [...state.widgets];
-            widgets.push(action.widget);
+            widgets.push(action.newWidget);
 
             return {
                 widgets: widgets

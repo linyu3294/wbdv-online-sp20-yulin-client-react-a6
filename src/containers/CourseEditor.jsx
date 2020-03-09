@@ -6,12 +6,12 @@ import ModuleListComponent from "../components/course-editor/ModuleListComponent
 import moduleReducer from "../reducers/ModulesReducer";
 import lessonReducer from "../reducers/LessonsReducer";
 import topicReducer from "../reducers/TopicsReducer";
+import widgetsReducer from "../reducers/widgetReducer";
 import LessonListComponent from "../components/course-editor/LessonListComponent";
 import TopicListComponent from "../components/course-editor/TopicListComponent";
-import HeadingWidgetComponent from "../components/course-editor/widgets/HeadingWidget";
 import WidgetListComponent from "../components/course-editor/WidgetListCompnent";
 import "../styles/CourseEditor.css";
-import widgetsReducer from "../reducers/widgetReducer";
+
 
 class CourseEditor extends Component {
   state = {};
@@ -36,6 +36,7 @@ class CourseEditor extends Component {
   store = createStore(this.rootReducer);
 
   render() {
+
     return (
       <Provider store={this.store}>
         <div className="position-relative">
@@ -116,7 +117,6 @@ class CourseEditor extends Component {
                         selectedLessonID={this.props.selectedLessonID}
                         selectedTopicID={this.props.selectedTopicID}
                         widgets ={this.props.widgets}
-
                         widget = {this.props.widget}
                         // widget={{
                         //   text: "Heading 1",

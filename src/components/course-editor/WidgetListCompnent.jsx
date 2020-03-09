@@ -3,8 +3,10 @@ import {connect, Provider} from "react-redux";
 import HeadingWidget from "./widgets/HeadingWidget";
 import widgetService from "../../services/widgetService";
 import widgetActions from "../../actions/widgetActions";
+import topicService from "../../services/topicService";
 import topicActions from "../../actions/topicActions";
-import TopicListItemComponent from "./TopicListItemComponent";
+
+
 
 
 class WidgetListComponent extends React.Component {
@@ -12,14 +14,13 @@ class WidgetListComponent extends React.Component {
         super(props);
     }
     state = {
+        editingWidgetId: '',
         widget: {
                 id: '',
                 type: '',
                 title: '',
                 name: '',
                 size: 3},
-        editingWidgetId: ''
-
     }
 
     componentDidMount() {
@@ -43,20 +44,22 @@ class WidgetListComponent extends React.Component {
     }
 
     render() {
+        console.log("rendered widgets", (this.props.widget))
         return(
             <div>
                 {this.props.widgets && this.props.widgets.map(widget =>
                         <div>
-                        {this.state.widget.type === "HEADING" &&
+                        {widget.type === "HEADING" &&
                             <HeadingWidget
                                 key={widget.id}
                                 widget={widget}
+                                type = {widget.type}
                                 editing={this.state.editingWidgetId === this.state.widget.id}
                                 saveWidget={this.saveWidget}
                                 courseId={this.props.courseId}
                                 selectedModuleID={this.props.selectedModuleID}
                                 selectedLessonID={this.props.selectedLessonID}
-                        />}
+                            />}
 
                             {/*{widget.type === "PARAGRAPH" && */}
                             {/*        <ParagraphWidget saveWidget={this.saveWidget} */}
@@ -94,20 +97,21 @@ const dispatchToPropertyMapper = (dispatch) => ({
             )),
 
     createWidget: async (topicId) =>{
-            const newWidget = await widgetService.createWidget(topicId, {
-                title: "New Widget",
-                type: "HEADING",
-                })
-                console.log("fetched new widget", newWidget);
-                await dispatch(widgetActions.createWidget(newWidget));
-            },
+        widgetService.createWidget(
+            topicId, {
+                        type: "HEADING",
+                            })
+            .then(newWidget => {
+            dispatch(widgetActions.createWidget(newWidget));
+        })
+    },
 
-    findAllWidgets: () =>
-        widgetService.findAllWidgets()
-            .then(actualWidgets =>  dispatch({
-                type: "FIND_ALL_WIDGETS",
-                widgets: actualWidgets
-            }))
+    findAllWidgets: async () =>{
+        const response = await widgetService.findAllWidgets()
+        const widgets = await dispatch(widgetActions.findAllWidgets(response))
+        console.log("Widgets" , widgets)
+
+    }
 })
 
 export default connect
