@@ -1,9 +1,6 @@
 import {JANNUNZI_API_URL, LOCAL_API_URL} from "../constants/app-constants";
 
 export const createWidget = async (topicId, widget) => {
-    {
-        console.log(widget)
-    }
     const response = await fetch(`${LOCAL_API_URL}/topics/${topicId}/widgets`, {
         method: "POST",
         body: JSON.stringify(widget),
@@ -11,11 +8,6 @@ export const createWidget = async (topicId, widget) => {
             'content-type': "application/json"
         }
     })
-    {
-        console.log("")
-        console.log("Response", response)
-        console.log("")
-    }
     return await response.json()
 }
 

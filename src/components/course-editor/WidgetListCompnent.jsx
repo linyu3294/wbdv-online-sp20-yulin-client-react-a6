@@ -47,7 +47,7 @@ class WidgetListComponent extends React.Component {
             <div>
                 {this.props.widgets && this.props.widgets.map(widget =>
                         <div>
-                        {widget.type === "HEADING" &&
+                        {this.state.widget.type === "HEADING" &&
                             <HeadingWidget
                                 key={widget.id}
                                 widget={widget}
@@ -92,14 +92,16 @@ const dispatchToPropertyMapper = (dispatch) => ({
             .then(widgets => dispatch(
                 widgetActions.findWidgetsForTopic(widgets)
             )),
-    createWidget: (topicId) =>
-        widgetService.createWidget(topicId, {
-            title: "New Widget",
-            type: "HEADING",
-            })
-            .then(newWidget => {
-                dispatch(widgetActions.createWidget(newWidget));
-            }),
+
+    createWidget: async (topicId) =>{
+            const newWidget = await widgetService.createWidget(topicId, {
+                title: "New Widget",
+                type: "HEADING",
+                })
+                console.log("fetched new widget", newWidget);
+                await dispatch(widgetActions.createWidget(newWidget));
+            },
+
     findAllWidgets: () =>
         widgetService.findAllWidgets()
             .then(actualWidgets =>  dispatch({

@@ -9,8 +9,6 @@ const initialState = {
 const widgetsReducer = (state = initialState, action) => {
     let widgets, indexToUpdate;
 
-
-
     switch (action.type) {
         case FIND_WIDGETS_FOR_TOPIC:
             return {
@@ -24,9 +22,10 @@ const widgetsReducer = (state = initialState, action) => {
             }
 
         case CREATE_WIDGET: {
+            console.log("Adding widgets", action.widget)
             widgets = [...state.widgets];
             widgets.push(action.widget);
-            console.log("Adding widgets", widgets)
+
             return {
                 widgets: widgets
             }

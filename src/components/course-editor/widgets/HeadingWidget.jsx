@@ -5,10 +5,7 @@ import {connect} from "react-redux";
 import widgetService from "../../../services/widgetService";
 
 class HeadingWidgetComponent extends Component {
- state = {
-     widget: {id: '',
-              text: 'Text'}
- }
+
 
   handleTextChange = e => {};
 

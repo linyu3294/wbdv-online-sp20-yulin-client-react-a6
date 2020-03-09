@@ -116,6 +116,7 @@ class CourseEditor extends Component {
                         selectedLessonID={this.props.selectedLessonID}
                         selectedTopicID={this.props.selectedTopicID}
                         widgets ={this.props.widgets}
+
                         widget = {this.props.widget}
                         // widget={{
                         //   text: "Heading 1",

@@ -10,10 +10,12 @@ export const findWidgetsForTopic= (widgets) => ({
     widgets: widgets
 })
 
-export const createWidget = (newWidget) => ({
+export const createWidget = (newWidget) => (
+    {
     type: CREATE_WIDGET,
     newWidget: newWidget
-})
+    }
+)
 
 export const deleteWidget = (widgetId) => ({
     type: DELETE_WIDGET,
