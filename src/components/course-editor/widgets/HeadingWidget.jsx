@@ -3,6 +3,9 @@ import '../../../styles/Widgets.css';
 import HeadingPreview from "./HeadingPreview";
 import {connect} from "react-redux";
 import widgetService from "../../../services/widgetService";
+import topicService from "../../../services/topicService";
+import topicActions from "../../../actions/topicActions";
+import widgetActions from "../../../actions/widgetActions";
 
 class HeadingWidgetComponent extends Component {
 
@@ -40,7 +43,8 @@ class HeadingWidgetComponent extends Component {
                       <option value="HEADING">Heading Widget</option>
                       <option value="PARAGRAPH">Paragraph Widget</option>
                     </select>
-                    <button className="btn btn-danger mx-1 float-left">
+                    <button className="btn btn-danger mx-1 float-left"
+                            onClick={()=>this.props.deleteWidget(this.props.widget.id)}>
                       <i className="fa fa-trash"></i>
                     </button>
                   </div>
@@ -88,21 +92,21 @@ const stateToPropertyMapper = state => {
   }
 }
 
-const dispatchToPropertyMapper = (dispatcher) => ({
-deleteWidget: (widgetId) =>
-    widgetService.deleteWidget(widgetId)
-        .then(status => dispatcher({
-          type: 'DELETE_WIDGET',
-          widgetId: widgetId
-        })),
-updateWidget: (widgetId, newWidget) =>
-    widgetService.updateWidget(widgetId, newWidget)
-        .then(status => dispatcher({
-          type: "UPDATE",
-          widget: newWidget
-        })),
-})
+const dispatchToPropertyMapper = dispatch => {
+    return {
+        deleteWidget: widgetId => {
+            widgetService.deleteWidget(widgetId).then(() => {
+                dispatch(widgetActions.deleteWidget(widgetId));
+            });
+        },
 
+        updateWidget: widget => {
+            widgetService.updateWidgeth(widget.id, widget).then(() => {
+                dispatch(widgetActions.updateWidget(widget));
+            });
+        }
+    };
+};
 
 
 export default connect(
