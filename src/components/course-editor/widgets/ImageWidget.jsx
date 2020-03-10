@@ -15,11 +15,11 @@ class ImageWidgetComponent extends Component {
 
   handleTextChange = e => {
       e.stopPropagation();
-      const newText = e.target.value;
+      const newURL = e.target.value;
       this.setState(prevState => {
-          prevState.widget.text = newText;
+          prevState.widget.url = newURL;
           return prevState
-      })};
+      })}
 
   handleNameChange = e => {
       e.stopPropagation();
@@ -27,15 +27,19 @@ class ImageWidgetComponent extends Component {
       this.setState(prevState => {
           prevState.widget.name = newName;
           return prevState
-      })};
+      })}
 
     handleTypeChange = e => {
         e.stopPropagation();
         const newType = e.target.value;
         this.setState(prevState => {
             prevState.widget.type = newType;
+            prevState.widget.name = newType + "WIDGET";
+            prevState.widget.url = "Source URL"
             return prevState
-        })};
+        })
+    this.props.updateWidget(this.state.widget)
+    }
 
   handleSizeChange = e => {
       e.stopPropagation();
@@ -95,7 +99,7 @@ class ImageWidgetComponent extends Component {
                 <div className="row my-2">
                     <div className="col-12">
                         <input type="text" className="form-control"
-                               placeholder={this.state.widget.text}
+                               placeholder={this.state.widget.url}
                                onChange={(e) => this.handleTextChange(e)}/>
                     </div>
                 </div>
@@ -120,7 +124,7 @@ class ImageWidgetComponent extends Component {
                 <div className="row">
                   <div className="col-12 my-2">
                     <h4>Preview</h4>
-                    <ImagePreview text={this.state.widget.text} size={this.state.widget.textSize}/>
+                    <ImagePreview sourceUrl={this.state.widget.url} />
                   </div>
                 </div>
               </div>

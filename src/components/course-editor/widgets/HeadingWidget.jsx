@@ -19,7 +19,7 @@ class HeadingWidgetComponent extends Component {
       this.setState(prevState => {
           prevState.widget.text = newText;
           return prevState
-      })};
+      })}
 
   handleNameChange = e => {
       e.stopPropagation();
@@ -27,15 +27,18 @@ class HeadingWidgetComponent extends Component {
       this.setState(prevState => {
           prevState.widget.name = newName;
           return prevState
-      })};
+      })}
 
     handleTypeChange = e => {
         e.stopPropagation();
         const newType = e.target.value;
         this.setState(prevState => {
             prevState.widget.type = newType;
+            prevState.widget.name = newType;
             return prevState
-        })};
+        })
+    this.props.updateWidget(this.state.widget)
+    }
 
   handleSizeChange = e => {
       e.stopPropagation();

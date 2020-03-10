@@ -6,6 +6,7 @@ import widgetService from "../../services/widgetService";
 import widgetActions from "../../actions/widgetActions";
 import ListWidget from "./widgets/ListWidget";
 import ImageWidget from "./widgets/ImageWidget";
+import ImagePreview from "./widgets/ImagePreview";
 
 
 
@@ -22,6 +23,7 @@ class WidgetListComponent extends React.Component {
                 title: '',
                 text: '',
                 name: '',
+                url: '',
                 textSize: ''},
     }
 
@@ -56,12 +58,20 @@ class WidgetListComponent extends React.Component {
                         <>
                             <div className="card-body">
                             <>
-                                {widget.textSize ===1 && <h6>{widget.text}</h6>}
-                                {widget.textSize ===2 && <h5>{widget.text}</h5>}
-                                {widget.textSize ===3 && <h4>{widget.text}</h4>}
-                                {widget.textSize ===4 && <h3>{widget.text}</h3>}
-                                {widget.textSize ===5 && <h2>{widget.text}</h2>}
-                                {widget.textSize ===6 && <h1>{widget.text}</h1>}
+                                    {widget.type === "IMAGE" && <ImagePreview sourceUrl={ widget.url}/>}
+                                    {(widget.type === "PARAGRAPH" || widget.type === "LIST" || widget.type === "HEADING")
+                                        && widget.textSize ===1 && <h6>{widget.text}</h6>}
+                                    {(widget.type === "PARAGRAPH" || widget.type === "LIST" || widget.type === "HEADING")
+                                        && widget.textSize ===2 && <h5>{widget.text}</h5>}
+                                    {(widget.type === "PARAGRAPH" || widget.type === "LIST" || widget.type === "HEADING")
+                                        && widget.textSize ===3 && <h4>{widget.text}</h4>}
+                                    {(widget.type === "PARAGRAPH" || widget.type === "LIST" || widget.type === "HEADING")
+                                        && widget.textSize ===4 && <h3>{widget.text}</h3>}
+                                    {(widget.type === "PARAGRAPH" || widget.type === "LIST" || widget.type === "HEADING")
+                                        && widget.textSize ===5 && <h2>{widget.text}</h2>}
+                                    {(widget.type === "PARAGRAPH" || widget.type === "LIST" || widget.type === "HEADING")
+                                        && widget.textSize ===6 && <h1>{widget.text}</h1>}
+
                                 <button className="btn btn-info mx-1 float-left"
                                         onClick={
                                             () => this.setState({
