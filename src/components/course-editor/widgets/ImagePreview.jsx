@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 
-const HeadingPreview = ({ text, size }) => {
+const ImagePreview = ({ text, size }) => {
   return (
     <>
       {size === 6 && <h1>{text}</h1>}
@@ -13,4 +13,4 @@ const HeadingPreview = ({ text, size }) => {
   );
 };
 
-export default HeadingPreview;
+export default ImagePreview;

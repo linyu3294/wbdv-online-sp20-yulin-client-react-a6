@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import '../../../styles/Widgets.css';
 import HeadingPreview from "./HeadingPreview";
 import {connect} from "react-redux";
+import ListPreview from "./ListPreview";
 
 
-class HeadingWidgetComponent extends Component {
+class ListWidgetComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -72,10 +73,10 @@ class HeadingWidgetComponent extends Component {
                     <select className="form-control float-left widget-type-select"
                             onChange={(e) => this.handleTypeChange(e)}
                             value={this.props.widget.type}>
-                        <option value="HEADING">Heading Widget</option>
-                        <option value="PARAGRAPH">Paragraph Widget</option>
-                        <option value="LIST">List Widget</option>
-                        <option value="IMAGE">Image Widget</option>
+                      <option value="HEADING">Heading Widget</option>
+                      <option value="PARAGRAPH">Paragraph Widget</option>
+                      <option value="LIST">List Widget</option>
+                      <option value="IMAGE">Image Widget</option>
                     </select>
                     <button className="btn btn-danger mx-1 float-left"
                             onClick={()=>this.props.deleteWidget(parseInt(this.state.widget.id))}>
@@ -120,7 +121,7 @@ class HeadingWidgetComponent extends Component {
                 <div className="row">
                   <div className="col-12 my-2">
                     <h4>Preview</h4>
-                    <HeadingPreview text={this.state.widget.text} size={this.state.widget.textSize}/>
+                    <ListPreview text={this.state.widget.text} size={this.state.widget.textSize}/>
                   </div>
                 </div>
               </div>
@@ -140,4 +141,4 @@ const stateToPropertyMapper = state => {
 
 export default connect(
     stateToPropertyMapper,
-)(HeadingWidgetComponent);
+)(ListWidgetComponent);

@@ -1,8 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import HeadingWidget from "./widgets/HeadingWidget";
+import ParagraphWidget from "./widgets/ParagraphWidget";
 import widgetService from "../../services/widgetService";
 import widgetActions from "../../actions/widgetActions";
+import ListWidget from "./widgets/ListWidget";
+import ImageWidget from "./widgets/ImageWidget";
+
 
 
 
@@ -85,12 +89,54 @@ class WidgetListComponent extends React.Component {
                     courseId={this.props.courseId}
                     selectedModuleID={this.props.selectedModuleID}
                     selectedLessonID={this.props.selectedLessonID}
+                    deleteWidget = {this.props.deleteWidget}
+                    updateWidget = {this.props.updateWidget}
                 />}
 
-                {/*{widget.type === "PARAGRAPH" && */}
-                {/*        <ParagraphWidget saveWidget={this.saveWidget} */}
-                {/*                         editing={this.state.editingWidgetId === widget.id} */}
-                {/*                         widget={widget}/>}*/}
+                { this.state.editingWidgetId === widget.id  &&
+                widget.type === "PARAGRAPH" &&
+                <ParagraphWidget
+                    key={widget.id}
+                    widget={widget}
+                    type = {widget.type}
+                    editing={this.state.editingWidgetId === widget.id}
+                    commitEdit={this.commitEdit}
+                    courseId={this.props.courseId}
+                    selectedModuleID={this.props.selectedModuleID}
+                    selectedLessonID={this.props.selectedLessonID}
+                    deleteWidget = {this.props.deleteWidget}
+                    updateWidget = {this.props.updateWidget}
+                />}
+
+                { this.state.editingWidgetId === widget.id  &&
+                widget.type === "LIST" &&
+                <ListWidget
+                    key={widget.id}
+                    widget={widget}
+                    type = {widget.type}
+                    editing={this.state.editingWidgetId === widget.id}
+                    commitEdit={this.commitEdit}
+                    courseId={this.props.courseId}
+                    selectedModuleID={this.props.selectedModuleID}
+                    selectedLessonID={this.props.selectedLessonID}
+                    deleteWidget = {this.props.deleteWidget}
+                    updateWidget = {this.props.updateWidget}
+                />}
+
+                { this.state.editingWidgetId === widget.id  &&
+                widget.type === "IMAGE" &&
+                <ImageWidget
+                    key={widget.id}
+                    widget={widget}
+                    type = {widget.type}
+                    editing={this.state.editingWidgetId === widget.id}
+                    commitEdit={this.commitEdit}
+                    courseId={this.props.courseId}
+                    selectedModuleID={this.props.selectedModuleID}
+                    selectedLessonID={this.props.selectedLessonID}
+                    deleteWidget = {this.props.deleteWidget}
+                    updateWidget = {this.props.updateWidget}
+                />}
             </>
             ) }
 
@@ -138,7 +184,20 @@ const dispatchToPropertyMapper = (dispatch) => ({
         const response = await widgetService.findAllWidgets()
         const widgets = await dispatch(widgetActions.findAllWidgets(response))
         console.log("Widgets" , widgets)
+    },
+
+    deleteWidget: widgetId => {
+        widgetService.deleteWidget(widgetId).then(() => {
+            dispatch(widgetActions.deleteWidget(widgetId));
+        });
+    },
+
+    updateWidget: widget => {
+        widgetService.updateWidget(widget.id, widget).then(() => {
+            dispatch(widgetActions.updateWidget(widget));
+        });
     }
+
 })
 
 export default connect

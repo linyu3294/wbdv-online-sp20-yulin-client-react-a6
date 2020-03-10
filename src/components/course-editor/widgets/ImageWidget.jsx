@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import '../../../styles/Widgets.css';
-import HeadingPreview from "./HeadingPreview";
 import {connect} from "react-redux";
+import ImagePreview from "./ImagePreview";
 
 
-class HeadingWidgetComponent extends Component {
+class ImageWidgetComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -120,7 +120,7 @@ class HeadingWidgetComponent extends Component {
                 <div className="row">
                   <div className="col-12 my-2">
                     <h4>Preview</h4>
-                    <HeadingPreview text={this.state.widget.text} size={this.state.widget.textSize}/>
+                    <ImagePreview text={this.state.widget.text} size={this.state.widget.textSize}/>
                   </div>
                 </div>
               </div>
@@ -140,4 +140,4 @@ const stateToPropertyMapper = state => {
 
 export default connect(
     stateToPropertyMapper,
-)(HeadingWidgetComponent);
+)(ImageWidgetComponent);

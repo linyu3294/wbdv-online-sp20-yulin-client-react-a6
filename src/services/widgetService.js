@@ -39,8 +39,6 @@ export const findAllWidgets = async () => {
     return widgets
 }
 
-
-
 export default {
     createWidget,
     findWidgetsForTopic,
