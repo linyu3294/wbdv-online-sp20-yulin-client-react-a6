@@ -34,21 +34,13 @@ class ImageWidgetComponent extends Component {
         const newType = e.target.value;
         this.setState(prevState => {
             prevState.widget.type = newType;
-            prevState.widget.name = newType + "WIDGET";
+            prevState.widget.name = newType + " WIDGET";
             prevState.widget.url = "Source URL"
             return prevState
         })
     this.props.updateWidget(this.state.widget)
     }
 
-  handleSizeChange = e => {
-      e.stopPropagation();
-      const newSize = parseInt(e.target.value);
-      this.setState(prevState => {
-          prevState.widget.textSize = newSize;
-          return prevState
-      })
-  }
 
     saveWidget = ( widget) => {
         this.props.commitEdit()
@@ -101,19 +93,6 @@ class ImageWidgetComponent extends Component {
                         <input type="text" className="form-control"
                                placeholder={this.state.widget.url}
                                onChange={(e) => this.handleTextChange(e)}/>
-                    </div>
-                </div>
-                <div className="row my-2">
-                    <div className="col-12">
-                    <select className="form-control" onChange={(e) => this.handleSizeChange(e)} value={this.state.widget.textSize}>
-
-                      <option value="6">Heading 1</option>
-                      <option value="5">Heading 2</option>
-                      <option value="4">Heading 3</option>
-                      <option value="3">Heading 4</option>
-                      <option value="2">Heading 5</option>
-                      <option value="1">Heading 6</option>
-                    </select>
                     </div>
                 </div>
                 <div className="row my-2">

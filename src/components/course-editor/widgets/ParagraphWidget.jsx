@@ -32,7 +32,7 @@ class ParagraphWidget extends React.Component {
         const newType = e.target.value;
         this.setState(prevState => {
             prevState.widget.type = newType;
-            prevState.widget.name = newType + "WIDGET";
+            prevState.widget.name = newType + " WIDGET";
             return prevState
         })
         this.props.updateWidget(this.state.widget)

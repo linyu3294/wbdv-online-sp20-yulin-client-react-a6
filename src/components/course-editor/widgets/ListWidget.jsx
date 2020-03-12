@@ -42,15 +42,6 @@ class ListWidgetComponent extends Component {
     this.props.updateWidget(this.state.widget)
     }
 
-  handleSizeChange = e => {
-      e.stopPropagation();
-      const newSize = parseInt(e.target.value);
-      this.setState(prevState => {
-          prevState.widget.textSize = newSize;
-          return prevState
-      })
-  }
-
     saveWidget = ( widget) => {
         this.props.commitEdit()
         this.props.updateWidget(widget)
@@ -99,22 +90,11 @@ class ListWidgetComponent extends Component {
                 </div>
                 <div className="row my-2">
                     <div className="col-12">
-                        <input type="text" className="form-control"
-                               placeholder={this.state.widget.text}
-                               onChange={(e) => this.handleTextChange(e)}/>
-                    </div>
-                </div>
-                <div className="row my-2">
-                    <div className="col-12">
-                    <select className="form-control" onChange={(e) => this.handleSizeChange(e)} value={this.state.widget.textSize}>
-
-                      <option value="6">Heading 1</option>
-                      <option value="5">Heading 2</option>
-                      <option value="4">Heading 3</option>
-                      <option value="3">Heading 4</option>
-                      <option value="2">Heading 5</option>
-                      <option value="1">Heading 6</option>
-                    </select>
+                         <textarea type="text"
+                                   className="form-control"
+                                   placeholder={this.state.widget.text}
+                                   rows = "5"
+                                   onChange={(e) => this.handleTextChange(e)}/>
                     </div>
                 </div>
                 <div className="row my-2">

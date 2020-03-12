@@ -34,7 +34,7 @@ class HeadingWidgetComponent extends Component {
         const newType = e.target.value;
         this.setState(prevState => {
             prevState.widget.type = newType;
-            prevState.widget.name = newType;
+            prevState.widget.name = newType + " WIDGET";
             return prevState
         })
     this.props.updateWidget(this.state.widget)
