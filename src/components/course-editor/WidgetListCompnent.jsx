@@ -36,6 +36,7 @@ class WidgetListComponent extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.selectedTopicID !== this.props.selectedTopicID) {
+
             // this.props.findAllWidgets();
             this.props.findWidgetsForTopic(this.props.selectedTopicID)
         }
@@ -176,6 +177,7 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const dispatchToPropertyMapper = (dispatch) => ({
+
     findWidgetsForTopic:  (topicId) =>
         widgetService.findWidgetsForTopic(topicId)
             .then(widgets => dispatch(
@@ -183,13 +185,13 @@ const dispatchToPropertyMapper = (dispatch) => ({
             )),
 
     createWidget: async (topicId) =>{
-        widgetService.createWidget(
+       const response = await widgetService.createWidget(
             topicId, {
                         type: "HEADING",
                             })
-            .then(newWidget => {
-            dispatch(widgetActions.createWidget(newWidget));
-        })
+        const newWidget = dispatch(widgetActions.createWidget(response));
+        console.log(newWidget)
+
     },
 
     findAllWidgets: async () =>{

@@ -25,6 +25,7 @@ export const updateWidget = async (wid, widget) =>{
             }
         }
     )
+    console.log(response)
     return await response.json()
 }
 
