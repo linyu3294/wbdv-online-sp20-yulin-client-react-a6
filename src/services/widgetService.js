@@ -1,7 +1,7 @@
-import {JANNUNZI_API_URL, LOCAL_API_URL} from "../constants/app-constants";
+import {JANNUNZI_API_URL, HEROKU_API_URL} from "../constants/app-constants";
 
 export const createWidget = async (topicId, widget) => {
-    const response = await fetch(`${LOCAL_API_URL}/topics/${topicId}/widgets`, {
+    const response = await fetch(`${HEROKU_API_URL}/topics/${topicId}/widgets`, {
         method: "POST",
         body: JSON.stringify(widget),
         headers: {
@@ -12,12 +12,12 @@ export const createWidget = async (topicId, widget) => {
 }
 
 export const deleteWidget = (widgetId) =>
-    fetch(`${LOCAL_API_URL}/widgets/${widgetId}`, {
+    fetch(`${HEROKU_API_URL}/widgets/${widgetId}`, {
         method: "DELETE"
     }).then(response => response.json())
 
 export const updateWidget = async (wid, widget) =>{
-    const response = await fetch(`${LOCAL_API_URL}/widgets/${wid}`, {
+    const response = await fetch(`${HEROKU_API_URL}/widgets/${wid}`, {
             method: "PUT",
             body: JSON.stringify(widget),
             headers: {
@@ -30,12 +30,12 @@ export const updateWidget = async (wid, widget) =>{
 }
 
 export const findWidgetsForTopic = async (topicId) =>
-    await fetch(`${LOCAL_API_URL}/topics/${topicId}/widgets`)
+    await fetch(`${HEROKU_API_URL}/topics/${topicId}/widgets`)
         .then(response => response.json())
 
 
 export const findAllWidgets = async () => {
-    const response = await fetch(`${LOCAL_API_URL}/widgets`)
+    const response = await fetch(`${HEROKU_API_URL}/widgets`)
     const widgets  = response.json()
     return widgets
 }
